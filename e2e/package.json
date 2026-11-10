@@ -1,0 +1,13 @@
+{
+  "name": "peplus-e2e",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Automated demo smoke test and backup recording for PePlus",
+  "type": "module",
+  "scripts": {
+    "e2e": "node run-e2e.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.65.0"
+  }
+}

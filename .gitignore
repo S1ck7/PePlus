@@ -1,0 +1,9 @@
+node_modules/
+.expo/
+dist/
+expo-env.d.ts
+*.tsbuildinfo
+# Firebase admin credentials (seed script only, never commit)
+serviceAccount*.json
+*-firebase-adminsdk-*.json
+.firebase/

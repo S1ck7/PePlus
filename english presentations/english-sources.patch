@@ -1,0 +1,352 @@
+diff --git a/src/i18n/index.tsx b/src/i18n/index.tsx
+index 0e0ec32..28bf04c 100644
+--- a/src/i18n/index.tsx
++++ b/src/i18n/index.tsx
+@@ -14,7 +14,7 @@ interface LanguageContextValue {
+ const LanguageContext = createContext<LanguageContextValue | null>(null);
+ 
+ export function LanguageProvider({ children }: PropsWithChildren) {
+-  const [language, setLanguage] = useState<Language>('ro');
++  const [language, setLanguage] = useState<Language>('en');
+   const dictionary = language === 'ro' ? ro : en;
+ 
+   // Romanian decimal comma for rates like "25.7" or 6.25 (1-2 decimals, so "1.050" thousands groups are left alone).
+diff --git a/video/backup/record.mjs b/video/backup/record.mjs
+index 038fed8..d891ccf 100644
+--- a/video/backup/record.mjs
++++ b/video/backup/record.mjs
+@@ -37,7 +37,7 @@ fs.rmSync(RAW, { recursive: true, force: true });
+ fs.mkdirSync(FRAMES, { recursive: true });
+ 
+ const browser = await chromium.launch({ channel: 'chrome', headless: true }).catch(() => chromium.launch({ headless: true }));
+-const context = await browser.newContext({ viewport: { width: 360, height: 780 }, deviceScaleFactor: 3, locale: 'ro-RO' });
++const context = await browser.newContext({ viewport: { width: 360, height: 780 }, deviceScaleFactor: 3, locale: 'en-US' });
+ // Tap indicator drawn inside the page, so the recording shows where each tap lands.
+ await context.addInitScript(() => {
+   window.addEventListener('pointerdown', e => {
+@@ -56,7 +56,7 @@ const page = await context.newPage();
+ page.on('pageerror', e => console.error('[pageerror]', e.message));
+ 
+ await page.goto(`${base}/connect`, { waitUntil: 'networkidle' });
+-await page.getByText('Toate datoriile.').first().waitFor({ timeout: 20000 });
++await page.getByText('All your debts.').first().waitFor({ timeout: 20000 });
+ await page.waitForTimeout(1500);
+ 
+ // Screencast at device pixels; frames arrive on change, each held until the next one.
+@@ -79,25 +79,25 @@ const tab = name => page.getByRole('tab', { name }).first();
+ 
+ // ---- INPUT (0:45-1:05 on stage = 0-20 s here) ----
+ log('connect screen');
+-await at(3.5); await tap(button(/Conectează \d+ în siguranță/i)); log('connect');
+-await button(/Permite accesul/i).waitFor({ timeout: 8000 });
+-await at(8); await tap(button(/Permite accesul/i)); log('allow');
+-await page.waitForFunction(() => [...document.querySelectorAll('[role="button"],button')].some(b => /^(Nu|Arată-mi)$/.test(b.textContent?.trim() || '') && b.getAttribute('aria-disabled') !== 'true'), null, { timeout: 20000 });
+-if (await button(/Arată-mi/i).isVisible().catch(() => false)) { await at(13); await tap(button(/Arată-mi/i)); log('show me'); }
+-await button(/^Nu$/).waitFor({ timeout: 10000 });
+-await at(16); await tap(button(/^Nu$/)); log('late payments: no');
+-await page.getByText('Bună, Radu').first().waitFor({ timeout: 15000 });
++await at(3.5); await tap(button(/Connect \d+ securely/i)); log('connect');
++await button(/Allow access/i).waitFor({ timeout: 8000 });
++await at(8); await tap(button(/Allow access/i)); log('allow');
++await page.waitForFunction(() => [...document.querySelectorAll('[role="button"],button')].some(b => /^(No|Show me)$/.test(b.textContent?.trim() || '') && b.getAttribute('aria-disabled') !== 'true'), null, { timeout: 20000 });
++if (await button(/Show me/i).isVisible().catch(() => false)) { await at(13); await tap(button(/Show me/i)); log('show me'); }
++await button(/^No$/).waitFor({ timeout: 10000 });
++await at(16); await tap(button(/^No$/)); log('late payments: no');
++await page.getByText('Hi, Radu').first().waitFor({ timeout: 15000 });
+ 
+ // ---- PROCESSING (1:05-1:30 = 20-45 s) ----
+-await at(27); await tap(button(/^Grad de îndatorare/i)); log('open debt vs income');
+-await at(36); await tap(button(/^Luna ta/i)); log('open your month');
++await at(27); await tap(button(/^Debt payments vs\. income/i)); log('open debt vs income');
++await at(36); await tap(button(/^Your month/i)); log('open your month');
+ 
+ // ---- OUTPUT: pay first (1:30-1:50 = 45-65 s) ----
+-await at(45); await tap(tab(/Luna asta/i)); log('this month');
+-await page.getByText('Și dacă plătesc mai mult?').first().waitFor({ timeout: 10000 });
++await at(45); await tap(tab(/This month/i)); log('this month');
++await page.getByText('What if I pay more?').first().waitFor({ timeout: 10000 });
+ await at(52);
+ {
+-  const slider = page.locator('[aria-label="În plus pe lună"]').first();
++  const slider = page.locator('[aria-label="Extra a month"]').first();
+   const b = await slider.boundingBox().catch(() => null);
+   if (b) {
+     const y = b.y + b.height / 2, x = f => b.x + b.width * f;
+@@ -106,7 +106,7 @@ await at(52);
+     await page.mouse.move(x(1 / 3), y, { steps: 30 }); await page.mouse.up();
+     log('slider up and back');
+     // Dragging back can land a step off; the reset button puts it exactly on the left-over money (600 lei).
+-    const reset = button(/^Revino la/i);
++    const reset = button(/^Reset to/i);
+     await page.waitForTimeout(700);
+     if (await reset.isVisible().catch(() => false)) await reset.click();
+     await page.waitForTimeout(1500);
+@@ -116,22 +116,22 @@ await at(52);
+ }
+ 
+ // ---- OUTPUT: pay less (1:50-2:15 = 65-90 s) ----
+-await at(65); await tap(tab(/Refinanțare/i)); log('pay less');
+-await button(/Refinanțează cu Raiffeisen Bank/i).waitFor({ timeout: 10000 });
+-await at(72); await tap(button(/Refinanțează cu Raiffeisen Bank/i)); log('refinance');
++await at(65); await tap(tab(/Pay less/i)); log('pay less');
++await button(/Refinance with Raiffeisen Bank/i).waitFor({ timeout: 10000 });
++await at(72); await tap(button(/Refinance with Raiffeisen Bank/i)); log('refinance');
+ await page.getByRole('checkbox').last().waitFor({ timeout: 8000 });
+ await at(76); await tap(page.getByRole('checkbox').last()); log('consent');
+-await at(79); await tap(button(/Trimite cererea/i)); log('send');
+-await page.getByText('Cerere trimisă').first().waitFor({ timeout: 15000 });
+-await at(87); await tap(button(/^Gata$/)); log('done');
++await at(79); await tap(button(/Send application/i)); log('send');
++await page.getByText('Application sent').first().waitFor({ timeout: 15000 });
++await at(87); await tap(button(/^Done$/)); log('done');
+ 
+ // ---- MEANING (2:15-2:30 = 90-105 s) ----
+-await at(90); await tap(tab(/Obiectiv/i)); log('goal');
+-await page.getByText('Momente de achitare').first().waitFor({ timeout: 10000 });
++await at(90); await tap(tab(/Goal/i)); log('goal');
++await page.getByText('Paid-off moments').first().waitFor({ timeout: 10000 });
+ // "Play my journey" was removed in the final UI: scroll through the paid-off moments, then open the chart.
+ await at(95); await page.mouse.move(180, 500); for (let i = 0; i < 14; i++) { await page.mouse.wheel(0, 40); await page.waitForTimeout(40); } log('scroll milestones');
+ await at(99);
+-{ const row = button(/^Cât datorezi în timp/i); await row.scrollIntoViewIfNeeded().catch(() => {}); await page.waitForTimeout(400); await tap(row); log('open chart');
++{ const row = button(/^What you owe over time/i); await row.scrollIntoViewIfNeeded().catch(() => {}); await page.waitForTimeout(400); await tap(row); log('open chart');
+   await page.waitForTimeout(500); for (let i = 0; i < 16; i++) { await page.mouse.wheel(0, 45); await page.waitForTimeout(35); } }
+ await at(105.5); log('end');
+ 
+diff --git a/video/scripts/voice.mjs b/video/scripts/voice.mjs
+index 5729741..5404233 100644
+--- a/video/scripts/voice.mjs
++++ b/video/scripts/voice.mjs
+@@ -6,16 +6,16 @@ import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
+ // text = what the line says; say = spelling fed to the voice ("PePlus" is read "P.E. Plus" otherwise;
+ // "Pay Plus" was the only spelling a speech-to-text check heard as one clear name, with both voices).
+ const LINES = [
+-  'Cinci credite, cinci bănci. Care te costă cel mai mult?',
+-  'PePlus îți adună datoriile și îți arată costul real.',
+-  'Îți spune ce să plătești întâi, și cât.',
+-  'Îți găsește o bancă mai ieftină.',
+-  'Cu planul PePlus, Radu scapă de datorii în 2035, nu în 2054.',
+-  'PePlus. Toate datoriile. Un singur plan.',
+-].map(text => ({ text, say: text.replaceAll('PePlus', 'Pe Plus') }));
++  'Five loans, five lenders. Which one costs you the most?',
++  'PePlus brings your debts together and shows their real cost.',
++  'It tells you what to pay first, and how much.',
++  'It finds you a cheaper bank.',
++  'With the PePlus plan, Radu is debt-free in 2035, not 2054.',
++  'PePlus. All your debts. One plan.',
++].map(text => ({ text, say: text.replaceAll('PePlus', 'Pay Plus') }));
+ // aoede: Gemini TTS (natural, D-048), recorded once with scripts/tts_gemini.py + split_vo.py into vo-src/ (free tier: ~10 requests/day).
+ // alina: Edge neural voice, regenerated on every run (alternate).
+-const VOICES = { aoede: { src: 'vo-src/aoede' }, alina: 'ro-RO-AlinaNeural' };
++const VOICES = { aoede: { src: 'vo-src/aoede' }, alina: 'en-US-AvaNeural' };
+ const TEMPO = 1.13; // the Gemini take is a calm read; 13% faster fits the 20 s cut without sounding rushed
+ const LEAD = 0.4;  // silence before the first line
+ const GAP = 0.3;   // breath between lines (20-second cut)
+diff --git a/video/scripts/words.py b/video/scripts/words.py
+index 6d788f1..17dd667 100644
+--- a/video/scripts/words.py
++++ b/video/scripts/words.py
+@@ -10,7 +10,7 @@ for voice, data in tl.items():
+     lines = []
+     for l in data['lines']:
+         raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', 'public/' + l['file'], '-f', 'f32le', '-ac', '1', '-ar', '16000', '-'], capture_output=True).stdout
+-        segs, _ = model.transcribe(np.frombuffer(raw, np.float32), word_timestamps=True, language='ro', beam_size=5)
++        segs, _ = model.transcribe(np.frombuffer(raw, np.float32), word_timestamps=True, language='en', beam_size=5)
+         heard = [w for s in segs for w in s.words]
+         words = l['text'].split()
+         if len(heard) == len(words):
+diff --git a/video/src/Ad.tsx b/video/src/Ad.tsx
+index b811b4e..57a2232 100644
+--- a/video/src/Ad.tsx
++++ b/video/src/Ad.tsx
+@@ -24,24 +24,24 @@ const lerp = (a: number, b: number, p: number) => a + (b - a) * p;
+ // ---------- Scene 1+2: the map (chaos -> hub -> branches -> real cost) ----------
+ 
+ const DEBTS = [
+-  { bank: 'bt', type: 'Credit ipotecar', amount: 310000 },
+-  { bank: 'ing', type: 'Nevoi personale', amount: 36000 },
+-  { bank: 'bcr', type: 'Card de credit', amount: 8500 },
+-  { bank: 'credius', type: 'Credit IFN', amount: 3200 },
+-  { bank: 'mokka', type: 'Rate BNPL', amount: 900 },
++  { bank: 'bt', type: 'Mortgage', amount: 310000 },
++  { bank: 'ing', type: 'Personal loan', amount: 36000 },
++  { bank: 'bcr', type: 'Credit card', amount: 8500 },
++  { bank: 'credius', type: 'IFN loan', amount: 3200 },
++  { bank: 'mokka', type: 'Buy now, pay later', amount: 900 },
+ ];
+ const CHAOS_LAND = [[-560, -250], [-20, -310], [-250, 70], [470, 190], [-590, 330]];
+ const CHAOS_PORT = [[-150, -360], [150, -130], [-170, 100], [140, 330], [-110, 560]];
+ const NOTES = [
+-  { bank: 'ing', title: 'ING Bank', body: 'Rata scadentă în 2 zile: 1.085 lei' },
+-  { bank: 'bcr', title: 'BCR', body: 'Plata minimă pe card: 450 lei' },
+-  { bank: 'bt', title: 'Banca Transilvania', body: 'Dobânda ipotecii s-a schimbat (IRCC)' },
++  { bank: 'ing', title: 'ING Bank', body: 'Loan payment due in 2 days: 1.085 lei' },
++  { bank: 'bcr', title: 'BCR', body: 'Card minimum due: 450 lei' },
++  { bank: 'bt', title: 'Banca Transilvania', body: 'Your mortgage rate changed (IRCC)' },
+ ];
+ const NODES = [
+-  { id: 'cost', label: 'Cost real', sub: 'dobânzi + comisioane' },
+-  { id: 'first', label: 'Plătește întâi', sub: 'ordinea' },
+-  { id: 'less', label: 'Plătește mai puțin', sub: 'refinanțare' },
+-  { id: 'goal', label: 'Obiectiv', sub: 'ziua fără datorii' },
++  { id: 'cost', label: 'Real cost', sub: 'interest + fees' },
++  { id: 'first', label: 'Pay first', sub: 'the order' },
++  { id: 'less', label: 'Pay less', sub: 'refinance' },
++  { id: 'goal', label: 'Goal', sub: 'debt-free date' },
+ ];
+ const NODE_LAND = [[-560, -250], [560, -250], [560, 250], [-560, 250]];
+ const NODE_PORT = [[-245, -500], [245, -500], [245, 500], [-245, 500]];
+@@ -148,8 +148,8 @@ const MapScene: React.FC<{ hubAt: number; branchAt: number; costAt: number; dur:
+ 
+       {/* Kicker for line 1. */}
+       <div style={{ position: 'absolute', left: 0, right: 0, top: portrait ? height - 250 * u : height - 170 * u, textAlign: 'center', opacity: kicker, fontFamily }}>
+-        <span style={{ color: C.white, fontSize: (portrait ? 64 : 58) * u, fontWeight: 800, letterSpacing: -1 * u }}>5 credite · 5 bănci · </span>
+-        <span style={{ color: C.coral, fontSize: (portrait ? 64 : 58) * u, fontWeight: 800, letterSpacing: -1 * u }}>care te costă?</span>
++        <span style={{ color: C.white, fontSize: (portrait ? 64 : 58) * u, fontWeight: 800, letterSpacing: -1 * u }}>5 loans · 5 lenders · </span>
++        <span style={{ color: C.coral, fontSize: (portrait ? 64 : 58) * u, fontWeight: 800, letterSpacing: -1 * u }}>which one hurts?</span>
+       </div>
+ 
+       {/* Hub: the PePlus mark with pulsing rings. */}
+@@ -167,7 +167,7 @@ const MapScene: React.FC<{ hubAt: number; branchAt: number; costAt: number; dur:
+         <Logo size={210 * u} variant="ink" />
+       </div>
+       <div style={{ position: 'absolute', left: 0, right: 0, top: cy + 200 * u, textAlign: 'center', opacity: textOne, fontFamily, color: C.white, fontSize: 60 * u, fontWeight: 800, letterSpacing: -1 * u }}>
+-        Toate datoriile, într-un loc.
++        Every debt. One place.
+       </div>
+ 
+       {/* Feature nodes. */}
+@@ -206,8 +206,8 @@ const MapScene: React.FC<{ hubAt: number; branchAt: number; costAt: number; dur:
+             background: 'rgba(245,252,249,0.96)', transform: `scale(${s})`, transformOrigin: 'top center', fontFamily,
+             boxShadow: `0 ${20 * u}px ${60 * u}px rgba(0,0,0,0.4)`,
+           }}>
+-            <div style={{ fontSize: 24 * u, fontWeight: 700, color: C.mintDeep, letterSpacing: 2 * u, textTransform: 'uppercase' }}>Radu dă pe dobânzi + comisioane</div>
+-            <div style={{ fontSize: 76 * u, fontWeight: 800, color: C.ink, letterSpacing: -2 * u, fontVariantNumeric: 'tabular-nums' }}>{lei(v)} lei<span style={{ fontSize: 34 * u, fontWeight: 700, color: C.mintDeep }}> / lună</span></div>
++            <div style={{ fontSize: 24 * u, fontWeight: 700, color: C.mintDeep, letterSpacing: 2 * u, textTransform: 'uppercase' }}>Radu pays in interest + fees</div>
++            <div style={{ fontSize: 76 * u, fontWeight: 800, color: C.ink, letterSpacing: -2 * u, fontVariantNumeric: 'tabular-nums' }}>{lei(v)} lei<span style={{ fontSize: 34 * u, fontWeight: 700, color: C.mintDeep }}> / month</span></div>
+           </div>
+         );
+       })()}
+@@ -296,22 +296,22 @@ const PhoneScene: React.FC<{ swapAt: number; dur: number }> = ({ swapAt, dur })
+       </div>
+       <div style={textBox}>
+         <div style={{ position: 'absolute', inset: 0 }}>
+-          <Copy p={a1} align={portrait ? 'center' : 'left'} pill="Plătește întâi"
+-            head={<>+{lei(plus)} lei pe cardul<br />de credit BCR</>}
+-            sub="Costă cel mai mult: 25,7% pe an, cu dobânzi și comisioane." />
++          <Copy p={a1} align={portrait ? 'center' : 'left'} pill="Pay first"
++            head={<>+{lei(plus)} lei on your<br />BCR credit card</>}
++            sub="It costs the most: 25.7% a year in interest and fees." />
+         </div>
+         <div style={{ position: 'absolute', inset: 0 }}>
+-          <Copy p={a2} align={portrait ? 'center' : 'left'} pill="Plătește mai puțin"
+-            head={<>Economisești<br />{lei(save)} lei</>}
+-            sub="Creditul ING → Raiffeisen Bank, 6,25% fix, după toate comisioanele."
+-            chip="Ordonat după economia ta, nu după comision" />
++          <Copy p={a2} align={portrait ? 'center' : 'left'} pill="Pay less"
++            head={<>Save {lei(save)} lei</>}
++            sub="ING personal loan → Raiffeisen Bank, 6.25% fixed, after all fees."
++            chip="Ranked by your saving, not our fee" />
+         </div>
+       </div>
+       <div style={{ position: 'absolute', ...nPos, opacity: n1, transform: `translateY(${(1 - n1) * -30 * u}px) scale(${0.92 + 0.08 * n1})` }}>
+-        <Notification title="Luna asta" body="Pune 600 lei în plus pe cardul BCR" width={nW} />
++        <Notification title="This month" body="Put 600 lei extra on your BCR credit card" width={nW} />
+       </div>
+       <div style={{ position: 'absolute', ...nPos, opacity: n2, transform: `translateY(${(1 - n2) * -30 * u}px) scale(${0.92 + 0.08 * n2})` }}>
+-        <Notification bank="raiffeisen" title="Raiffeisen Bank · probabil eligibil" body="Rata: 1.085 → 1.004 lei pe lună" width={nW} />
++        <Notification bank="raiffeisen" title="Raiffeisen Bank · likely eligible" body="Payment 1.085 → 1.004 lei a month" width={nW} />
+       </div>
+       <Sfx at={22} src="ding" volume={0.25} />
+       <Sfx at={swapAt} src="whoosh" volume={0.3} />
+@@ -337,8 +337,8 @@ const GoalScene: React.FC<{ dur: number }> = ({ dur }) => {
+   return (
+     <AbsoluteFill>
+       <div style={{ position: 'absolute', left: 0, right: 0, top: cy - R - (portrait ? 210 : 150) * u, textAlign: 'center', fontFamily, opacity: minLabel }}>
+-        <span style={{ color: C.dim, fontSize: 34 * u, fontWeight: 600 }}>Doar minimul: </span>
+-        <span style={{ color: C.coral, fontSize: 34 * u, fontWeight: 800, textDecoration: settled ? 'line-through' : 'none' }}>iun. 2054</span>
++        <span style={{ color: C.dim, fontSize: 34 * u, fontWeight: 600 }}>Minimums only: </span>
++        <span style={{ color: C.coral, fontSize: 34 * u, fontWeight: 800, textDecoration: settled ? 'line-through' : 'none' }}>Jun 2054</span>
+       </div>
+       <svg width={width} height={height} style={{ position: 'absolute', inset: 0 }}>
+         <circle cx={cx} cy={cy} r={R} fill="none" stroke="rgba(181,232,211,0.15)" strokeWidth={26 * u} />
+@@ -346,9 +346,9 @@ const GoalScene: React.FC<{ dur: number }> = ({ dur }) => {
+           strokeDasharray={circ} strokeDashoffset={circ * (1 - p)} transform={`rotate(-90 ${cx} ${cy})`} style={{ filter: `drop-shadow(0 0 ${18 * u}px rgba(181,232,211,0.6))` }} />
+       </svg>
+       <div style={{ position: 'absolute', left: cx, top: cy, transform: 'translate(-50%,-50%)', textAlign: 'center', fontFamily }}>
+-        <div style={{ color: C.dim, fontSize: 30 * u, fontWeight: 700, letterSpacing: 4 * u, textTransform: 'uppercase' }}>Fără datorii</div>
++        <div style={{ color: C.dim, fontSize: 30 * u, fontWeight: 700, letterSpacing: 4 * u, textTransform: 'uppercase' }}>Debt-free</div>
+         <div style={{ color: C.white, fontSize: 170 * u, fontWeight: 800, letterSpacing: -6 * u, lineHeight: 1, fontVariantNumeric: 'tabular-nums', transform: `scale(${settled ? 1 + 0.06 * (1 - fade(f, t1, t1 + 10)) : 1})` }}>{year}</div>
+-        <div style={{ color: C.mint, fontSize: 40 * u, fontWeight: 700, opacity: fade(f, t1 - 2, t1 + 6) }}>februarie</div>
++        <div style={{ color: C.mint, fontSize: 40 * u, fontWeight: 700, opacity: fade(f, t1 - 2, t1 + 6) }}>February</div>
+       </div>
+       {/* Burst of dots when it lands. */}
+       {Array.from({ length: 18 }).map((_, i) => {
+@@ -358,8 +358,8 @@ const GoalScene: React.FC<{ dur: number }> = ({ dur }) => {
+         return <div key={i} style={{ position: 'absolute', left: cx + Math.cos(a) * r, top: cy + Math.sin(a) * r, width: 14 * u, height: 14 * u, borderRadius: 99, background: i % 3 ? C.mint : C.white, opacity: bp > 0 ? 1 - bp : 0, transform: 'translate(-50%,-50%)' }} />;
+       })}
+       <div style={{ position: 'absolute', left: 0, right: 0, top: cy + R + 60 * u, textAlign: 'center', fontFamily }}>
+-        <div style={{ display: 'inline-block', padding: `${18 * u}px ${36 * u}px`, borderRadius: 999, background: C.mint, color: C.ink, fontSize: 48 * u, fontWeight: 800, letterSpacing: -1 * u, transform: `scale(${badge})` }}>Cu 19 ani mai devreme</div>
+-        <div style={{ color: C.dim, fontSize: 26 * u, fontWeight: 500, marginTop: 22 * u, opacity: fade(f, t1 + 10, t1 + 20) }}>Profil demo: Radu, 32 de ani, Cluj · fiecare rată achitată trece la următoarea datorie</div>
++        <div style={{ display: 'inline-block', padding: `${18 * u}px ${36 * u}px`, borderRadius: 999, background: C.mint, color: C.ink, fontSize: 48 * u, fontWeight: 800, letterSpacing: -1 * u, transform: `scale(${badge})` }}>19 years sooner</div>
++        <div style={{ color: C.dim, fontSize: 26 * u, fontWeight: 500, marginTop: 22 * u, opacity: fade(f, t1 + 10, t1 + 20) }}>Demo profile: Radu, 32, Cluj · each finished payment moves to the next debt</div>
+       </div>
+       {Array.from({ length: 10 }).map((_, i) => <Sfx key={i} at={t0 + Math.round(((t1 - t0) * i) / 10)} src="tick" volume={0.35} />)}
+       <Sfx at={t1 + 4} src="pop" volume={0.5} />
+@@ -375,7 +375,7 @@ const EndScene: React.FC<{ wordsAt: number }> = ({ wordsAt }) => {
+   const { width, height, fps, portrait, u } = useLayout();
+   const cx = width / 2, cy = height / 2 - (portrait ? 140 : 90) * u;
+   const s = pop(f, fps, 2, 11);
+-  const words = ['Toate datoriile.', 'Un singur plan.'];
++  const words = ['All your debts.', 'One plan.'];
+   return (
+     <AbsoluteFill>
+       {[0, 1].map(k => {
+@@ -398,7 +398,7 @@ const EndScene: React.FC<{ wordsAt: number }> = ({ wordsAt }) => {
+           })}
+         </div>
+         <div style={{ color: C.dim, fontSize: 26 * u, fontWeight: 600, marginTop: 50 * u, letterSpacing: 1 * u, opacity: fade(f, wordsAt + 24, wordsAt + 36) }}>
+-          Android · Creat pentru România · Stripe VibeHack 2026
++          Android · Built for Romania · Stripe VibeHack 2026
+         </div>
+       </div>
+       <Sfx at={2} src="chime" volume={0.45} />
+diff --git a/video/src/Backup.tsx b/video/src/Backup.tsx
+index 4ba8082..cee617c 100644
+--- a/video/src/Backup.tsx
++++ b/video/src/Backup.tsx
+@@ -8,11 +8,11 @@ export const BACKUP_SECONDS = 105.8;
+ const STAGE_OFFSET = 45; // the demo starts at 0:45 in the pitch
+ 
+ const PHASES = [
+-  { from: 0, to: 20, tag: 'Date de intrare', title: 'Conectează băncile, răspunde la o întrebare', note: 'Open banking doar pentru citire (PSD2), simulat în prototip.' },
+-  { from: 20, to: 45, tag: 'Procesare', title: '358.600 lei datorii · 600 lei rămași pe lună', note: 'Ratele sunt 38% din venit, sub limita BNR de 40%.' },
+-  { from: 45, to: 65, tag: 'Rezultat', title: 'Plătește întâi: +600 lei pe cardul BCR', note: 'Costă cel mai mult: 25,7% pe an, cu dobânzi și comisioane.' },
+-  { from: 65, to: 90, tag: 'Rezultat', title: 'Refinanțare: economisești 3.515 lei', note: 'Creditul ING → Raiffeisen Bank, 6,25% fix, probabil eligibil.' },
+-  { from: 90, to: 106, tag: 'Ce înseamnă', title: 'Fără datorii în feb. 2035, nu în iun. 2054', note: 'Păstrând rata de azi: fiecare rată achitată trece la următoarea datorie.' },
++  { from: 0, to: 20, tag: 'Input', title: 'Connect banks, answer one question', note: 'Read-only open banking (PSD2), simulated in this prototype.' },
++  { from: 20, to: 45, tag: 'Processing', title: '358.600 lei owed · 600 lei left a month', note: 'Debt payments are 38% of income, under the 40% BNR limit.' },
++  { from: 45, to: 65, tag: 'Output', title: 'Pay first: +600 lei on the BCR card', note: 'It costs the most: 25.7% a year in interest and fees.' },
++  { from: 65, to: 90, tag: 'Output', title: 'Pay less: save 3.515 lei', note: 'ING personal loan → Raiffeisen Bank, 6.25% fixed, likely eligible.' },
++  { from: 90, to: 106, tag: 'Meaning', title: 'Debt-free Feb 2035, not Jun 2054', note: "Keep paying today's total: each finished payment moves to the next debt." },
+ ];
+ 
+ export const Backup: React.FC = () => {
+@@ -36,7 +36,7 @@ export const Backup: React.FC = () => {
+       <div style={{ position: 'absolute', left: 90 * u, top: 80 * u, display: 'flex', alignItems: 'center', gap: 18 * u }}>
+         <div style={{ width: 70 * u, height: 70 * u, borderRadius: 20 * u, background: C.mint, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Logo size={56 * u} variant="ink" /></div>
+         <div style={{ color: C.white, fontSize: 40 * u, fontWeight: 800, letterSpacing: -1 * u }}>PePlus</div>
+-        <div style={{ color: C.dim, fontSize: 24 * u, fontWeight: 600, marginLeft: 8 * u }}>Demo live · Radu, profil demo</div>
++        <div style={{ color: C.dim, fontSize: 24 * u, fontWeight: 600, marginLeft: 8 * u }}>Live demo · Radu, demo profile</div>
+       </div>
+       {PHASES.map((p, i) => {
+         const a = Math.min(fade(sec * fps, p.from * fps, p.from * fps + 12), 1 - fade(sec * fps, p.to * fps - 10, p.to * fps));
+@@ -53,7 +53,7 @@ export const Backup: React.FC = () => {
+       {/* Stage clock + progress, so the presenter can stay in sync with the script. */}
+       <div style={{ position: 'absolute', left: 90 * u, bottom: 70 * u, width: phoneLeft - 170 * u }}>
+         <div style={{ display: 'flex', justifyContent: 'space-between', color: C.dim, fontSize: 22 * u, fontWeight: 600, fontVariantNumeric: 'tabular-nums' }}>
+-          <span>Timp pe scenă {clock}</span><span>0:45 → 2:30</span>
++          <span>Stage time {clock}</span><span>0:45 → 2:30</span>
+         </div>
+         <div style={{ height: 6 * u, borderRadius: 99, background: 'rgba(181,232,211,0.15)', marginTop: 12 * u, overflow: 'hidden' }}>
+           <div style={{ width: `${Math.min(100, (sec / BACKUP_SECONDS) * 100)}%`, height: '100%', background: C.mint }} />

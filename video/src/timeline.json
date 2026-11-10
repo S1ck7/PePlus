@@ -1,0 +1,84 @@
+{
+  "aoede": {
+    "lines": [
+      {
+        "text": "Cinci credite, cinci bănci. Care te costă cel mai mult?",
+        "file": "vo/aoede-1.wav",
+        "start": 0.4,
+        "dur": 3.403
+      },
+      {
+        "text": "PePlus îți adună datoriile și îți arată costul real.",
+        "file": "vo/aoede-2.wav",
+        "start": 4.103,
+        "dur": 2.797
+      },
+      {
+        "text": "Îți spune ce să plătești întâi, și cât.",
+        "file": "vo/aoede-3.wav",
+        "start": 7.199,
+        "dur": 2.09
+      },
+      {
+        "text": "Îți găsește o bancă mai ieftină.",
+        "file": "vo/aoede-4.wav",
+        "start": 9.59,
+        "dur": 1.417
+      },
+      {
+        "text": "Cu planul PePlus, Radu scapă de datorii în 2035, nu în 2054.",
+        "file": "vo/aoede-5.wav",
+        "start": 11.307,
+        "dur": 5.305
+      },
+      {
+        "text": "PePlus. Toate datoriile. Un singur plan.",
+        "file": "vo/aoede-6.wav",
+        "start": 16.912,
+        "dur": 2.895
+      }
+    ],
+    "total": 21.207
+  },
+  "alina": {
+    "lines": [
+      {
+        "text": "Cinci credite, cinci bănci. Care te costă cel mai mult?",
+        "file": "vo/alina-1.wav",
+        "start": 0.4,
+        "dur": 3.787
+      },
+      {
+        "text": "PePlus îți adună datoriile și îți arată costul real.",
+        "file": "vo/alina-2.wav",
+        "start": 4.487,
+        "dur": 2.545
+      },
+      {
+        "text": "Îți spune ce să plătești întâi, și cât.",
+        "file": "vo/alina-3.wav",
+        "start": 7.331,
+        "dur": 2.186
+      },
+      {
+        "text": "Îți găsește o bancă mai ieftină.",
+        "file": "vo/alina-4.wav",
+        "start": 9.818,
+        "dur": 1.435
+      },
+      {
+        "text": "Cu planul PePlus, Radu scapă de datorii în 2035, nu în 2054.",
+        "file": "vo/alina-5.wav",
+        "start": 11.553,
+        "dur": 4.568
+      },
+      {
+        "text": "PePlus. Toate datoriile. Un singur plan.",
+        "file": "vo/alina-6.wav",
+        "start": 16.421,
+        "dur": 3.703
+      }
+    ],
+    "total": 21.524
+  }
+}

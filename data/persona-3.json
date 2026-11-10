@@ -1,0 +1,660 @@
+{
+  "id": "persona-3",
+  "name": "Andrei Nistor",
+  "age": 26,
+  "city": "Iași",
+  "monthlyNetIncome": 6200,
+  "hadLatePayments": false,
+  "accounts": [
+    {
+      "id": "acc-p3-bt-current",
+      "bank": "Banca Transilvania",
+      "iban": "RO12BTRL0000345678901234",
+      "type": "current",
+      "balance": 2850.5
+    },
+    {
+      "id": "acc-p3-bt-savings",
+      "bank": "Banca Transilvania",
+      "iban": "RO12BTRL0000345678901235",
+      "type": "savings",
+      "balance": 3500
+    }
+  ],
+  "debts": [
+    {
+      "id": "debt-p3-card-raiff",
+      "type": "credit_card",
+      "lender": "Raiffeisen Bank",
+      "balance": 6500,
+      "originalAmount": 8000,
+      "interestRate": 24,
+      "rateType": "fixed",
+      "referenceIndex": "none",
+      "dae": 26.8,
+      "monthlyPayment": 350,
+      "monthlyFees": 4,
+      "remainingMonths": null,
+      "creditLimit": 8000,
+      "earlyRepaymentFeePct": 0,
+      "startDate": "2025-03-10"
+    },
+    {
+      "id": "debt-p3-overdraft-bt",
+      "type": "overdraft",
+      "lender": "Banca Transilvania",
+      "balance": 3500,
+      "originalAmount": 6000,
+      "interestRate": 14.5,
+      "rateType": "variable",
+      "referenceIndex": "IRCC",
+      "dae": 15.5,
+      "monthlyPayment": 60,
+      "monthlyFees": 0,
+      "remainingMonths": null,
+      "creditLimit": 6000,
+      "earlyRepaymentFeePct": 0,
+      "startDate": "2025-09-15"
+    },
+    {
+      "id": "debt-p3-leasing-bt",
+      "type": "leasing",
+      "lender": "BT Leasing",
+      "balance": 24000,
+      "originalAmount": 35000,
+      "interestRate": 7.8,
+      "rateType": "fixed",
+      "referenceIndex": "none",
+      "dae": 8.9,
+      "monthlyPayment": 780,
+      "monthlyFees": 15,
+      "remainingMonths": 34,
+      "creditLimit": null,
+      "earlyRepaymentFeePct": 1,
+      "startDate": "2024-09-01"
+    },
+    {
+      "id": "debt-p3-bnpl-tbi",
+      "type": "bnpl",
+      "lender": "tbi bank",
+      "balance": 1200,
+      "originalAmount": 2400,
+      "interestRate": 0,
+      "rateType": "fixed",
+      "referenceIndex": "none",
+      "dae": 0,
+      "monthlyPayment": 300,
+      "monthlyFees": 0,
+      "remainingMonths": 4,
+      "creditLimit": null,
+      "earlyRepaymentFeePct": 0,
+      "startDate": "2026-07-01"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "tx-p3-1",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-10",
+      "amount": 6200,
+      "category": "salary",
+      "description": "Salariu Endava Romania SRL"
+    },
+    {
+      "id": "tx-p3-2",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-15",
+      "amount": -780,
+      "category": "debt_payment",
+      "description": "Rata leasing auto BT Leasing",
+      "debtId": "debt-p3-leasing-bt"
+    },
+    {
+      "id": "tx-p3-3",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-20",
+      "amount": -60,
+      "category": "debt_payment",
+      "description": "Dobanda descoperit de cont BT",
+      "debtId": "debt-p3-overdraft-bt"
+    },
+    {
+      "id": "tx-p3-4",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-22",
+      "amount": -350,
+      "category": "debt_payment",
+      "description": "Plata minima card de cumparaturi Raiffeisen",
+      "debtId": "debt-p3-card-raiff"
+    },
+    {
+      "id": "tx-p3-5",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-25",
+      "amount": -300,
+      "category": "debt_payment",
+      "description": "Rata BNPL tbi bank achizitie eMAG",
+      "debtId": "debt-p3-bnpl-tbi"
+    },
+    {
+      "id": "tx-p3-6",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-11",
+      "amount": -1800,
+      "category": "rent",
+      "description": "Chirie apartament 2 camere Copou"
+    },
+    {
+      "id": "tx-p3-7",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-02",
+      "amount": -280,
+      "category": "groceries",
+      "description": "Kaufland Nicolina"
+    },
+    {
+      "id": "tx-p3-8",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-08",
+      "amount": -245,
+      "category": "groceries",
+      "description": "Lidl Iasi"
+    },
+    {
+      "id": "tx-p3-9",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-16",
+      "amount": -310,
+      "category": "groceries",
+      "description": "Carrefour Palas"
+    },
+    {
+      "id": "tx-p3-10",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-24",
+      "amount": -265,
+      "category": "groceries",
+      "description": "Mega Image Copou"
+    },
+    {
+      "id": "tx-p3-11",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-14",
+      "amount": -180,
+      "category": "utilities",
+      "description": "Factura E.ON Energie"
+    },
+    {
+      "id": "tx-p3-12",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-18",
+      "amount": -110,
+      "category": "utilities",
+      "description": "Intretinere Asociatie Proprietari"
+    },
+    {
+      "id": "tx-p3-13",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-21",
+      "amount": -60,
+      "category": "utilities",
+      "description": "Digi Romania Internet & TV"
+    },
+    {
+      "id": "tx-p3-14",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-05",
+      "amount": -160,
+      "category": "transport",
+      "description": "Benzina OMV Pacurari"
+    },
+    {
+      "id": "tx-p3-15",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-19",
+      "amount": -140,
+      "category": "transport",
+      "description": "Benzina Rompetrol Copou"
+    },
+    {
+      "id": "tx-p3-16",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-06",
+      "amount": -120,
+      "category": "entertainment",
+      "description": "Cina Restaurant Fenice Palas"
+    },
+    {
+      "id": "tx-p3-17",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-13",
+      "amount": -95,
+      "category": "entertainment",
+      "description": "Iesire cafenea Acaju"
+    },
+    {
+      "id": "tx-p3-18",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-27",
+      "amount": -135,
+      "category": "entertainment",
+      "description": "Bilete Cinema City Palas & snacks"
+    },
+    {
+      "id": "tx-p3-19",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-12",
+      "amount": -200,
+      "category": "shopping",
+      "description": "Zara Palas Mall Iasi"
+    },
+    {
+      "id": "tx-p3-20",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-03",
+      "amount": -60,
+      "category": "subscriptions",
+      "description": "Netflix Standard"
+    },
+    {
+      "id": "tx-p3-21",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-04",
+      "amount": -25,
+      "category": "subscriptions",
+      "description": "Spotify Premium"
+    },
+    {
+      "id": "tx-p3-22",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-05",
+      "amount": -65,
+      "category": "subscriptions",
+      "description": "Abonament sala World Class"
+    },
+    {
+      "id": "tx-p3-23",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-08-17",
+      "amount": -100,
+      "category": "health",
+      "description": "Farmacia Catena Palas"
+    },
+    {
+      "id": "tx-p3-24",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-10",
+      "amount": 6200,
+      "category": "salary",
+      "description": "Salariu Endava Romania SRL"
+    },
+    {
+      "id": "tx-p3-25",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-15",
+      "amount": -780,
+      "category": "debt_payment",
+      "description": "Rata leasing auto BT Leasing",
+      "debtId": "debt-p3-leasing-bt"
+    },
+    {
+      "id": "tx-p3-26",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-20",
+      "amount": -60,
+      "category": "debt_payment",
+      "description": "Dobanda descoperit de cont BT",
+      "debtId": "debt-p3-overdraft-bt"
+    },
+    {
+      "id": "tx-p3-27",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-22",
+      "amount": -350,
+      "category": "debt_payment",
+      "description": "Plata minima card de cumparaturi Raiffeisen",
+      "debtId": "debt-p3-card-raiff"
+    },
+    {
+      "id": "tx-p3-28",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-25",
+      "amount": -300,
+      "category": "debt_payment",
+      "description": "Rata BNPL tbi bank achizitie eMAG",
+      "debtId": "debt-p3-bnpl-tbi"
+    },
+    {
+      "id": "tx-p3-29",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-11",
+      "amount": -1800,
+      "category": "rent",
+      "description": "Chirie apartament 2 camere Copou"
+    },
+    {
+      "id": "tx-p3-30",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-02",
+      "amount": -280,
+      "category": "groceries",
+      "description": "Kaufland Nicolina"
+    },
+    {
+      "id": "tx-p3-31",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-08",
+      "amount": -245,
+      "category": "groceries",
+      "description": "Lidl Iasi"
+    },
+    {
+      "id": "tx-p3-32",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-16",
+      "amount": -310,
+      "category": "groceries",
+      "description": "Carrefour Palas"
+    },
+    {
+      "id": "tx-p3-33",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-24",
+      "amount": -265,
+      "category": "groceries",
+      "description": "Mega Image Copou"
+    },
+    {
+      "id": "tx-p3-34",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-14",
+      "amount": -180,
+      "category": "utilities",
+      "description": "Factura E.ON Energie"
+    },
+    {
+      "id": "tx-p3-35",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-18",
+      "amount": -110,
+      "category": "utilities",
+      "description": "Intretinere Asociatie Proprietari"
+    },
+    {
+      "id": "tx-p3-36",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-21",
+      "amount": -60,
+      "category": "utilities",
+      "description": "Digi Romania Internet & TV"
+    },
+    {
+      "id": "tx-p3-37",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-05",
+      "amount": -160,
+      "category": "transport",
+      "description": "Benzina OMV Pacurari"
+    },
+    {
+      "id": "tx-p3-38",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-19",
+      "amount": -140,
+      "category": "transport",
+      "description": "Benzina Rompetrol Copou"
+    },
+    {
+      "id": "tx-p3-39",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-06",
+      "amount": -120,
+      "category": "entertainment",
+      "description": "Cina Restaurant Fenice Palas"
+    },
+    {
+      "id": "tx-p3-40",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-13",
+      "amount": -95,
+      "category": "entertainment",
+      "description": "Iesire cafenea Acaju"
+    },
+    {
+      "id": "tx-p3-41",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-27",
+      "amount": -135,
+      "category": "entertainment",
+      "description": "Bilete Cinema City Palas & snacks"
+    },
+    {
+      "id": "tx-p3-42",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-12",
+      "amount": -200,
+      "category": "shopping",
+      "description": "Zara Palas Mall Iasi"
+    },
+    {
+      "id": "tx-p3-43",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-03",
+      "amount": -60,
+      "category": "subscriptions",
+      "description": "Netflix Standard"
+    },
+    {
+      "id": "tx-p3-44",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-04",
+      "amount": -25,
+      "category": "subscriptions",
+      "description": "Spotify Premium"
+    },
+    {
+      "id": "tx-p3-45",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-05",
+      "amount": -65,
+      "category": "subscriptions",
+      "description": "Abonament sala World Class"
+    },
+    {
+      "id": "tx-p3-46",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-09-17",
+      "amount": -100,
+      "category": "health",
+      "description": "Farmacia Catena Palas"
+    },
+    {
+      "id": "tx-p3-47",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-10",
+      "amount": 6200,
+      "category": "salary",
+      "description": "Salariu Endava Romania SRL"
+    },
+    {
+      "id": "tx-p3-48",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-15",
+      "amount": -780,
+      "category": "debt_payment",
+      "description": "Rata leasing auto BT Leasing",
+      "debtId": "debt-p3-leasing-bt"
+    },
+    {
+      "id": "tx-p3-49",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-20",
+      "amount": -60,
+      "category": "debt_payment",
+      "description": "Dobanda descoperit de cont BT",
+      "debtId": "debt-p3-overdraft-bt"
+    },
+    {
+      "id": "tx-p3-50",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-22",
+      "amount": -350,
+      "category": "debt_payment",
+      "description": "Plata minima card de cumparaturi Raiffeisen",
+      "debtId": "debt-p3-card-raiff"
+    },
+    {
+      "id": "tx-p3-51",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-25",
+      "amount": -300,
+      "category": "debt_payment",
+      "description": "Rata BNPL tbi bank achizitie eMAG",
+      "debtId": "debt-p3-bnpl-tbi"
+    },
+    {
+      "id": "tx-p3-52",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-11",
+      "amount": -1800,
+      "category": "rent",
+      "description": "Chirie apartament 2 camere Copou"
+    },
+    {
+      "id": "tx-p3-53",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-02",
+      "amount": -280,
+      "category": "groceries",
+      "description": "Kaufland Nicolina"
+    },
+    {
+      "id": "tx-p3-54",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-08",
+      "amount": -245,
+      "category": "groceries",
+      "description": "Lidl Iasi"
+    },
+    {
+      "id": "tx-p3-55",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-16",
+      "amount": -310,
+      "category": "groceries",
+      "description": "Carrefour Palas"
+    },
+    {
+      "id": "tx-p3-56",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-24",
+      "amount": -265,
+      "category": "groceries",
+      "description": "Mega Image Copou"
+    },
+    {
+      "id": "tx-p3-57",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-14",
+      "amount": -180,
+      "category": "utilities",
+      "description": "Factura E.ON Energie"
+    },
+    {
+      "id": "tx-p3-58",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-18",
+      "amount": -110,
+      "category": "utilities",
+      "description": "Intretinere Asociatie Proprietari"
+    },
+    {
+      "id": "tx-p3-59",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-21",
+      "amount": -60,
+      "category": "utilities",
+      "description": "Digi Romania Internet & TV"
+    },
+    {
+      "id": "tx-p3-60",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-05",
+      "amount": -160,
+      "category": "transport",
+      "description": "Benzina OMV Pacurari"
+    },
+    {
+      "id": "tx-p3-61",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-19",
+      "amount": -140,
+      "category": "transport",
+      "description": "Benzina Rompetrol Copou"
+    },
+    {
+      "id": "tx-p3-62",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-06",
+      "amount": -120,
+      "category": "entertainment",
+      "description": "Cina Restaurant Fenice Palas"
+    },
+    {
+      "id": "tx-p3-63",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-13",
+      "amount": -95,
+      "category": "entertainment",
+      "description": "Iesire cafenea Acaju"
+    },
+    {
+      "id": "tx-p3-64",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-27",
+      "amount": -135,
+      "category": "entertainment",
+      "description": "Bilete Cinema City Palas & snacks"
+    },
+    {
+      "id": "tx-p3-65",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-12",
+      "amount": -200,
+      "category": "shopping",
+      "description": "Zara Palas Mall Iasi"
+    },
+    {
+      "id": "tx-p3-66",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-03",
+      "amount": -60,
+      "category": "subscriptions",
+      "description": "Netflix Standard"
+    },
+    {
+      "id": "tx-p3-67",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-04",
+      "amount": -25,
+      "category": "subscriptions",
+      "description": "Spotify Premium"
+    },
+    {
+      "id": "tx-p3-68",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-05",
+      "amount": -65,
+      "category": "subscriptions",
+      "description": "Abonament sala World Class"
+    },
+    {
+      "id": "tx-p3-69",
+      "accountId": "acc-p3-bt-current",
+      "date": "2026-10-17",
+      "amount": -100,
+      "category": "health",
+      "description": "Farmacia Catena Palas"
+    }
+  ]
+}

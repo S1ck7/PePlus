@@ -1,0 +1,295 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Inter'; font-weight: 400 800; src: url(inter-latin.woff2) format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 400 800; src: url(inter-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+1E00-1EFF; }
+:root {
+  --bg: #F7F5F8; --surface: #fff; --mint: #B5E8D3; --mint-soft: #E3F6EE;
+  --ink: #123B2C; --ink-2: #2E5A49; --accent: #2F6B55; --text: #2B3348; --muted: #5E6578;
+  --border: #E6E1E9; --deep0: #04140E; --deep1: #0B2A1F; --dim: rgba(230,246,239,.7); --coral: #E0604E;
+}
+* { box-sizing: border-box; margin: 0; }
+body { font-family: Inter, sans-serif; background: #ddd; padding: 20px; color: var(--text); }
+section { width: 1600px; padding: 56px 64px; border-radius: 28px; margin-bottom: 20px; background: var(--bg); position: relative; overflow: hidden; }
+section.deep { background: radial-gradient(900px 500px at 10% 0%, #1d4a39 0%, transparent 60%), linear-gradient(160deg, var(--deep1), var(--deep0)); color: #fff; }
+section.deep::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(181,232,211,.12) 1px, transparent 1px); background-size: 28px 28px; }
+section > * { position: relative; }
+.eyebrow { font-size: 18px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.deep .eyebrow { color: var(--mint); }
+h2 { font-size: 46px; font-weight: 800; letter-spacing: -.03em; color: var(--ink); margin-bottom: 40px; }
+.deep h2 { color: #fff; }
+h2 em { font-style: normal; color: var(--accent); }
+.deep h2 em { color: var(--mint); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 24px; box-shadow: 0 8px 24px rgba(18,59,44,.06); }
+.card.mint { background: linear-gradient(150deg, #c9efdf, var(--mint-soft)); border-color: #bfe6d5; }
+.deep .card { background: rgba(255,255,255,.06); border-color: rgba(181,232,211,.18); box-shadow: none; color: var(--dim); }
+.deep .card.mint { background: linear-gradient(150deg, rgba(181,232,211,.28), rgba(181,232,211,.1)); border-color: rgba(181,232,211,.45); }
+.card h3 { font-size: 24px; font-weight: 800; color: var(--ink); margin-bottom: 8px; letter-spacing: -.01em; }
+.deep .card h3 { color: #fff; }
+.card p { font-size: 18px; line-height: 1.45; color: var(--muted); }
+.deep .card p { color: var(--dim); }
+code { font-family: ui-monospace, Consolas, monospace; font-size: .9em; background: var(--mint-soft); color: var(--ink); padding: 2px 7px; border-radius: 6px; }
+.deep code { background: rgba(181,232,211,.15); color: var(--mint); }
+.row { display: flex; align-items: stretch; }
+.arrow { flex: 0 0 56px; display: flex; align-items: center; justify-content: center; }
+.arrow svg { width: 40px; height: 24px; }
+.num { width: 44px; height: 44px; border-radius: 50%; background: var(--mint); color: var(--ink); font-weight: 800; font-size: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.icon { font-size: 30px; margin-bottom: 12px; }
+.tag { display: inline-block; font-size: 14px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 5px 10px; border-radius: 99px; background: var(--mint-soft); color: var(--accent); }
+.deep .tag { background: rgba(181,232,211,.16); color: var(--mint); }
+
+/* stats */
+#stats { padding: 44px 56px; }
+#stats .grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 20px; }
+#stats .big { font-size: 64px; font-weight: 800; letter-spacing: -.04em; color: #fff; line-height: 1; margin: 12px 0 10px; }
+#stats .big s { color: rgba(181,232,211,.45); text-decoration-thickness: 5px; }
+#stats .big b { color: var(--mint); }
+
+/* journey */
+#journey .row > .card { flex: 1; }
+#journey .branchline { height: 54px; margin-left: 1041px; border-left: 3px dashed var(--coral); }
+#journey .warn { border: 2px dashed var(--coral); background: #fff6f4; width: 600px; margin-left: 741px; }
+#journey .warn h3 { color: #9b2f22; }
+
+/* engine */
+#engine .cols { display: grid; grid-template-columns: 1fr 56px 1.25fr 56px 1.25fr 56px 1fr; align-items: stretch; }
+#engine .col { justify-content: center; } #engine .colhead { position: absolute; top: -40px; } #engine .col { position: relative; } #engine .cols { margin-top: 64px; }
+#engine .col { display: flex; flex-direction: column; gap: 16px; }
+#engine .colhead { font-size: 15px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--mint); margin-bottom: 4px; }
+#engine .card { padding: 18px 20px; }
+#engine .card h3 { font-size: 20px; margin-bottom: 4px; font-family: ui-monospace, Consolas, monospace; color: var(--mint); }
+#engine .card.plain h3 { font-family: Inter, sans-serif; color: #fff; }
+#engine .card p { font-size: 16px; }
+#engine .chain { display: flex; flex-direction: column; gap: 0; }
+#engine .down { height: 22px; display: flex; justify-content: center; }
+#engine .down svg { height: 22px; width: 20px; }
+
+/* architecture */
+#arch .layout { display: grid; grid-template-columns: 300px 56px 1fr 56px 380px; align-items: center; }
+#arch .phone { border: 2px solid var(--ink); border-radius: 36px; padding: 28px; background: #fff; }
+#arch .phone .title { font-weight: 800; font-size: 20px; color: var(--ink); margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; }
+#arch .layer { border-radius: 16px; padding: 16px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 19px; font-weight: 700; color: var(--ink); background: var(--mint-soft); border: 1px solid #cdeedf; }
+#arch .layer span { font-weight: 500; font-size: 16px; color: var(--muted); font-family: ui-monospace, Consolas, monospace; }
+#arch .layer.hi { background: linear-gradient(150deg,#c9efdf,var(--mint-soft)); border-color: #a9dcc6; }
+#arch .split { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+#arch .split .layer { flex-direction: column; align-items: flex-start; gap: 4px; margin: 0; }
+#arch .ext { border: 2px dashed #9fb3aa; background: transparent; box-shadow: none; }
+#arch .fb { border-radius: 28px; padding: 26px; background: #fff8e6; border: 1px solid #f3dfa6; }
+#arch .fb .layer { background: #fff; border-color: #f0e1b5; }
+#arch .lbl { font-size: 14px; color: var(--muted); text-align: center; font-weight: 600; margin-top: 4px; }
+#arch .arrow { flex-direction: column; }
+
+/* business */
+#biz .flow { display: grid; grid-template-columns: 1fr 1.4fr 1fr 1.4fr 1fr; align-items: center; }
+#biz .node { text-align: center; padding: 34px 24px; }
+#biz .node .icon { font-size: 54px; }
+#biz .edge { display: flex; flex-direction: column; gap: 26px; padding: 0 10px; }
+#biz .e { font-size: 17px; font-weight: 600; color: var(--ink-2); text-align: center; }
+#biz .e .line { height: 3px; background: var(--accent); margin: 8px 0; position: relative; border-radius: 2px; }
+#biz .e .line::after { content: ''; position: absolute; right: -2px; top: -7px; border: 8px solid transparent; border-left: 12px solid var(--accent); border-right: 0; }
+#biz .e.back .line::after { right: auto; left: -2px; border-left: 0; border-right: 12px solid var(--accent); }
+#biz .e.money { color: #8a5a00; }
+#biz .e.money .line { background: #d9a520; }
+#biz .e.money .line::after { border-right-color: #d9a520; }
+#biz .rule { margin-top: 36px; display: flex; gap: 20px; }
+#biz .rule .card { flex: 1; display: flex; gap: 18px; align-items: center; }
+#biz .rule .icon { margin: 0; font-size: 34px; }
+
+/* timeline */
+#tl .track { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; position: relative; }
+#tl .track::before { content: ''; position: absolute; left: 4%; right: 4%; top: 22px; height: 4px; background: linear-gradient(90deg, rgba(181,232,211,.2), var(--mint)); border-radius: 2px; }
+#tl .dot { width: 48px; height: 48px; border-radius: 50%; background: var(--mint); color: var(--deep1); font-weight: 800; font-size: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 22px; box-shadow: 0 0 0 8px rgba(181,232,211,.15); position: relative; }
+#tl .track > div { display: flex; flex-direction: column; } #tl .card { padding: 22px; flex: 1; }
+#tl .card h3 { font-size: 22px; }
+#tl ul { padding-left: 18px; margin-top: 10px; }
+#tl li { font-size: 16px; line-height: 1.4; margin-bottom: 8px; color: var(--dim); }
+#tl li::marker { color: var(--mint); }
+
+/* repo */
+#repo .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+#repo .group h4 { font-size: 15px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: flex; gap: 10px; align-items: center; }
+#repo .group h4::after { content: ''; flex: 1; height: 2px; background: var(--border); }
+#repo .f { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 16px 18px; margin-bottom: 12px; }
+#repo .f.key { background: linear-gradient(150deg,#c9efdf,var(--mint-soft)); border-color: #bfe6d5; }
+#repo .f b { font-family: ui-monospace, Consolas, monospace; font-size: 18px; color: var(--ink); }
+#repo .f p { font-size: 15px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+</style></head>
+<body>
+
+<!-- STATS -->
+<section id="stats" class="deep">
+  <div class="grid">
+    <div class="card mint"><span class="tag">Radu, measured by the engine</span><div class="big"><s>2054</s> → <b>2035</b></div><p>Debt-free 19 years sooner by keeping today's payment</p></div>
+    <div class="card"><span class="tag">Refinance</span><div class="big">3,515</div><p>lei saved net, after every fee</p></div>
+    <div class="card"><span class="tag">Real offers</span><div class="big">16</div><p>from 7 Romanian banks, ranked by saving</p></div>
+    <div class="card"><span class="tag">Quality</span><div class="big">22</div><p>automated tests pin every stage number</p></div>
+  </div>
+</section>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="arr" viewBox="0 0 40 24"><path d="M2 12h32M24 3l10 9-10 9" fill="none" stroke="#2F6B55" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="arrm" viewBox="0 0 40 24"><path d="M2 12h32M24 3l10 9-10 9" fill="none" stroke="#B5E8D3" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="dn" viewBox="0 0 20 22"><path d="M10 1v17M3 12l7 8 7-8" fill="none" stroke="#B5E8D3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="eyebrow">The user journey</div>
+  <h2>Five screens, <em>one clear answer each.</em></h2>
+  <div class="row">
+    <div class="card"><div class="num">1</div><div class="icon">🏦</div><h3>Connect banks</h3><p>Read-only open-banking consent and one late-payment question</p></div>
+    <div class="arrow"><svg><use href="#arr"/></svg></div>
+    <div class="card"><div class="num">2</div><div class="icon">📊</div><h3>Home</h3><p>Every debt, its real yearly cost, income vs. the 40% BNR limit</p></div>
+    <div class="arrow"><svg><use href="#arr"/></svg></div>
+    <div class="card mint"><div class="num">3</div><div class="icon">🗓️</div><h3>This month</h3><p>Which debt gets the extra money, and why, in one sentence</p></div>
+    <div class="arrow"><svg><use href="#arr"/></svg></div>
+    <div class="card mint"><div class="num">4</div><div class="icon">💸</div><h3>Pay less</h3><p>Refinance offers ranked only by your net saving</p></div>
+    <div class="arrow"><svg><use href="#arr"/></svg></div>
+    <div class="card"><div class="num">5</div><div class="icon">🎯</div><h3>Goal</h3><p>Debt-free date: the plan vs. paying only minimums</p></div>
+  </div>
+  <div class="branchline"></div>
+  <div class="card warn"><h3>🧭 Over the limit? A path, not a "no".</h3><p>Which debts to clear first, where to cut spending, and the month you qualify to refinance.</p></div>
+</section>
+
+<!-- ENGINE -->
+<section id="engine" class="deep">
+  <div class="eyebrow">How it works · <code>src/engine/</code></div>
+  <h2>Plain, deterministic maths. <em>Every number checkable by hand.</em></h2>
+  <div class="cols">
+    <div class="col">
+      <div class="colhead">Input</div>
+      <div class="card plain"><h3>🏦 Bank snapshot</h3><p>Debts, rates, fees, terms</p></div>
+      <div class="card plain"><h3>💰 Cash flow</h3><p>Net income and 90 days of spending</p></div>
+      <div class="card plain"><h3>📋 Bank offers</h3><p>16 offers, 7 banks</p></div>
+    </div>
+    <div class="arrow"><svg><use href="#arrm"/></svg></div>
+    <div class="col">
+      <div class="colhead">Analyse</div>
+      <div class="card"><h3>realAnnualCost</h3><p>Interest + every recurring fee, in lei/year</p></div>
+      <div class="card"><h3>summarizeBudget</h3><p>Surplus and debt-to-income vs. 40%</p></div>
+      <div class="card"><h3>earlyRepaymentFee</h3><p>OUG 52/2016 and OUG 50/2010 caps</p></div>
+      <div class="card"><h3>estimateEligibility</h3><p>40% limit + the late-payment answer</p></div>
+    </div>
+    <div class="arrow"><svg><use href="#arrm"/></svg></div>
+    <div class="col">
+      <div class="colhead">Decide</div>
+      <div class="chain">
+        <div class="card"><h3>payoffOrder</h3><p>Highest real cost rate first, with a reason</p></div>
+        <div class="down"><svg><use href="#dn"/></svg></div>
+        <div class="card"><h3>simulatePayoff</h3><p>Month by month, rolling freed payments forward</p></div>
+      </div>
+      <div class="card"><h3>rankRefinanceOffers</h3><p>Net saving after exit + new-loan fees</p></div>
+      <div class="card"><h3>eligibilityOutlook</h3><p>The path and month back under 40%</p></div>
+    </div>
+    <div class="arrow"><svg><use href="#arrm"/></svg></div>
+    <div class="col">
+      <div class="colhead">Show</div>
+      <div class="card mint plain"><h3>🗓️ This month</h3><p>The exact move</p></div>
+      <div class="card mint plain"><h3>💸 Pay less</h3><p>Only offers that save</p></div>
+      <div class="card mint plain"><h3>🎯 Goal</h3><p>The debt-free date</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section id="arch">
+  <div class="eyebrow">Architecture</div>
+  <h2>The maths runs on the phone. <em>The cloud only remembers.</em></h2>
+  <div class="layout">
+    <div>
+      <div class="card ext"><div class="icon">🏦</div><h3>PSD2 aggregator</h3><p>Finqware / Salt Edge in production. Users log in at their bank (SCA); read-only tokens.</p></div>
+      <div class="lbl">simulated in the prototype</div>
+    </div>
+    <div class="arrow"><svg><use href="#arr"/></svg></div>
+    <div class="phone">
+      <div class="title">📱 Expo app <span class="tag">React Native · TypeScript</span></div>
+      <div class="layer hi">Screens <span>app/ · src/screens/</span></div>
+      <div class="layer">Persona &amp; session state <span>src/data/</span></div>
+      <div class="split">
+        <div class="layer hi">Engine<span>src/engine/</span></div>
+        <div class="layer">EN / RO<span>src/i18n/</span></div>
+        <div class="layer">Backend<span>src/backend/</span></div>
+      </div>
+      <div class="layer" style="border-style:dashed;background:#fff">Offline fallback: bundled JSON <span>data/</span></div>
+    </div>
+    <div class="arrow"><svg><use href="#arr"/></svg></div>
+    <div class="fb">
+      <div class="title" style="font-weight:800;font-size:20px;color:var(--ink);margin-bottom:16px">☁️ Firebase <span class="tag" style="background:#fff;color:#8a5a00">europe-west</span></div>
+      <div class="layer">Anonymous Auth</div>
+      <div class="layer">users/{uid}<span>profile</span></div>
+      <div class="layer">snapshot · applications<span>owner only</span></div>
+      <div class="layer" style="margin:0">offers<span>read-only</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS -->
+<section id="biz">
+  <div class="eyebrow">Business approach</div>
+  <h2>Free for the borrower. <em>Paid only when a refinance closes.</em></h2>
+  <div class="flow">
+    <div class="card node"><div class="icon">👤</div><h3>Borrower</h3><p>Several loans, pays 0 lei</p></div>
+    <div class="edge">
+      <div class="e">connects banks for free<div class="line"></div></div>
+      <div class="e back"><div class="line"></div>offers ranked by <b>their</b> saving</div>
+    </div>
+    <div class="card node mint"><img src="icon.png" style="width:76px;height:76px;border-radius:20px;margin-bottom:14px;box-shadow:0 8px 20px rgba(47,107,85,.25)"><h3>PePlus</h3><p>Plan + eligibility check, registered credit intermediary</p></div>
+    <div class="edge">
+      <div class="e">pre-checked application<br>(under 40%, verified cash flow)<div class="line"></div></div>
+      <div class="e back money"><div class="line"></div>referral fee on payout<br><b>1.2% mortgage · 2.5% personal</b></div>
+    </div>
+    <div class="card node"><div class="icon">🏛️</div><h3>Partner bank</h3><p>Lower acquisition cost, fewer rejected files</p></div>
+  </div>
+  <div class="rule">
+    <div class="card"><div class="icon">🛡️</div><div><h3>Conflict-of-interest firewall</h3><p>Ranking uses the user's net saving only. The fee never changes the order.</p></div></div>
+    <div class="card"><div class="icon">🚫</div><div><h3>"Don't refinance" is an answer</h3><p>If no offer saves money after fees, the app says so.</p></div></div>
+    <div class="card"><div class="icon">📈</div><div><h3>Year 1 → Year 3</h3><p>~2.02M lei → ~10.1M lei gross (assumed funnel)</p></div></div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="tl" class="deep">
+  <div class="eyebrow">How we built it</div>
+  <h2>Six phases, <em>from idea to stage.</em></h2>
+  <div class="track">
+    <div><div class="dot">1</div><div class="card"><h3>Foundation</h3><ul><li>Idea chosen against the brief</li><li>Romanian rules verified</li><li>16 bank offers collected and re-checked</li></ul></div></div>
+    <div><div class="dot">2</div><div class="card"><h3>Core app</h3><ul><li>Skeleton and demo personas</li><li>Calculation engine + tests</li><li>Five journey screens</li><li>Romanian translation</li></ul></div></div>
+    <div><div class="dot">3</div><div class="card"><h3>Depth</h3><ul><li>Path to eligibility</li><li>"What if I pay more?"</li><li>Overspending case</li><li>About &amp; limits, third persona</li></ul></div></div>
+    <div><div class="dot">4</div><div class="card"><h3>Backend</h3><ul><li>Firebase project</li><li>Backend layer, offline fallback</li><li>UI wired to Firestore</li><li>Security rules</li></ul></div></div>
+    <div><div class="dot">5</div><div class="card"><h3>Polish</h3><ul><li>Full UI redesign and brand</li><li>Drop-down first layout</li><li>Real bank logos</li><li>Native Romanian review</li></ul></div></div>
+    <div><div class="dot">6</div><div class="card mint"><h3>Pitch</h3><ul><li>Market and business model</li><li>Q&amp;A bank, timed script</li><li>Offline deck</li><li>Ad video, recorded demo</li></ul></div></div>
+  </div>
+</section>
+
+<!-- REPO -->
+<section id="repo">
+  <div class="eyebrow">Repository map</div>
+  <h2>Where everything lives.</h2>
+  <div class="grid">
+    <div class="group"><h4>📱 App</h4>
+      <div class="f key"><b>app/</b><p>Routes: connect, Home, This month, Pay less, Goal, about</p></div>
+      <div class="f"><b>src/screens/</b><p>Screen logic, shared session and plan state</p></div>
+      <div class="f"><b>src/components/</b><p>Charts, calendar, offer cards, UI kit</p></div>
+      <div class="f"><b>src/i18n/</b><p>English and Romanian strings</p></div>
+    </div>
+    <div class="group"><h4>🧮 Logic</h4>
+      <div class="f key"><b>src/engine/</b><p>Deterministic money maths + tests</p></div>
+      <div class="f"><b>src/backend/</b><p>Firebase auth and Firestore, offline fallback + tests</p></div>
+      <div class="f"><b>src/data/</b><p>Persona and offer loaders</p></div>
+      <div class="f"><b>firestore.rules</b><p>Each user sees only their own data</p></div>
+    </div>
+    <div class="group"><h4>🗂️ Data &amp; tools</h4>
+      <div class="f key"><b>data/</b><p>3 demo personas + 16 bank offers</p></div>
+      <div class="f"><b>assets/</b><p>Brand and real bank logos</p></div>
+      <div class="f"><b>scripts/</b><p>demo-numbers, seed-offers</p></div>
+      <div class="f"><b>e2e/</b><p>Automated demo smoke test</p></div>
+    </div>
+    <div class="group"><h4>🎤 Pitch</h4>
+      <div class="f key"><b>english presentations/</b><p>English deck, PDF, script, Q&amp;A, videos</p></div>
+      <div class="f"><b>slides/</b><p>Romanian deck + PDF</p></div>
+      <div class="f"><b>video/</b><p>Ad and backup-demo pipeline</p></div>
+      <div class="f"><b>docs/</b><p>Stage script, Q&amp;A, ad script, README images</p></div>
+    </div>
+  </div>
+</section>
+</body></html>

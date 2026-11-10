@@ -1,0 +1,564 @@
+{
+  "id": "persona-2",
+  "name": "Elena Dumitrescu",
+  "age": 29,
+  "city": "București",
+  "monthlyNetIncome": 5500,
+  "hadLatePayments": true,
+  "accounts": [
+    {
+      "id": "acc-p2-bcr-current",
+      "bank": "BCR",
+      "iban": "RO33RNCB0000123498760001",
+      "type": "current",
+      "balance": 640.25
+    },
+    {
+      "id": "acc-p2-raiff-current",
+      "bank": "Raiffeisen Bank",
+      "iban": "RO55RZBR0000123498760001",
+      "type": "current",
+      "balance": 320.1
+    }
+  ],
+  "debts": [
+    {
+      "id": "debt-p2-personal-bcr",
+      "type": "personal_loan",
+      "lender": "BCR",
+      "balance": 38000,
+      "originalAmount": 45000,
+      "interestRate": 12.85,
+      "rateType": "fixed",
+      "referenceIndex": "none",
+      "dae": 14.2,
+      "monthlyPayment": 1180,
+      "monthlyFees": 15,
+      "remainingMonths": 42,
+      "creditLimit": null,
+      "earlyRepaymentFeePct": 1.0,
+      "startDate": "2023-05-10"
+    },
+    {
+      "id": "debt-p2-personal-raiff",
+      "type": "personal_loan",
+      "lender": "Raiffeisen Bank",
+      "balance": 32000,
+      "originalAmount": 40000,
+      "interestRate": 12.5,
+      "rateType": "fixed",
+      "referenceIndex": "none",
+      "dae": 13.9,
+      "monthlyPayment": 1040,
+      "monthlyFees": 12,
+      "remainingMonths": 38,
+      "creditLimit": null,
+      "earlyRepaymentFeePct": 1.0,
+      "startDate": "2023-08-15"
+    },
+    {
+      "id": "debt-p2-card-bcr",
+      "type": "credit_card",
+      "lender": "BCR",
+      "balance": 9400,
+      "originalAmount": 9400,
+      "interestRate": 26.5,
+      "rateType": "fixed",
+      "referenceIndex": "none",
+      "dae": 30.1,
+      "monthlyPayment": 560,
+      "monthlyFees": 5,
+      "remainingMonths": null,
+      "creditLimit": 10000,
+      "earlyRepaymentFeePct": 0,
+      "startDate": "2023-11-20"
+    },
+    {
+      "id": "debt-p2-ifn-cred",
+      "type": "ifn_loan",
+      "lender": "Credius IFN",
+      "balance": 4800,
+      "originalAmount": 6000,
+      "interestRate": 46.0,
+      "rateType": "fixed",
+      "referenceIndex": "none",
+      "dae": 62.4,
+      "monthlyPayment": 590,
+      "monthlyFees": 20,
+      "remainingMonths": 14,
+      "creditLimit": null,
+      "earlyRepaymentFeePct": 1.0,
+      "startDate": "2024-04-05"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "tx-p2-0001",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-15",
+      "amount": 5500.0,
+      "category": "salary",
+      "description": "Salariu Retail Logistics SRL"
+    },
+    {
+      "id": "tx-p2-0002",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-16",
+      "amount": -1180.0,
+      "category": "debt_payment",
+      "description": "Rată credit George BCR",
+      "debtId": "debt-p2-personal-bcr"
+    },
+    {
+      "id": "tx-p2-0003",
+      "accountId": "acc-p2-raiff-current",
+      "date": "2026-08-18",
+      "amount": -1040.0,
+      "category": "debt_payment",
+      "description": "Rată credit nevoi personale Raiffeisen",
+      "debtId": "debt-p2-personal-raiff"
+    },
+    {
+      "id": "tx-p2-0004",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-22",
+      "amount": -560.0,
+      "category": "debt_payment",
+      "description": "Plată minimă card credit BCR",
+      "debtId": "debt-p2-card-bcr"
+    },
+    {
+      "id": "tx-p2-0005",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-25",
+      "amount": -590.0,
+      "category": "debt_payment",
+      "description": "Rată împrumut Credius IFN",
+      "debtId": "debt-p2-ifn-cred"
+    },
+    {
+      "id": "tx-p2-0006",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-02",
+      "amount": -350.0,
+      "category": "groceries",
+      "description": "Mega Image București Sector 3"
+    },
+    {
+      "id": "tx-p2-0007",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-09",
+      "amount": -400.0,
+      "category": "groceries",
+      "description": "Kaufland Titan"
+    },
+    {
+      "id": "tx-p2-0008",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-17",
+      "amount": -320.0,
+      "category": "groceries",
+      "description": "Lidl Dristor"
+    },
+    {
+      "id": "tx-p2-0009",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-24",
+      "amount": -230.0,
+      "category": "groceries",
+      "description": "Profi City Sector 3"
+    },
+    {
+      "id": "tx-p2-0010",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-06",
+      "amount": -140.0,
+      "category": "utilities",
+      "description": "Enel Energie Muntenia"
+    },
+    {
+      "id": "tx-p2-0011",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-10",
+      "amount": -65.0,
+      "category": "utilities",
+      "description": "Digi Romania"
+    },
+    {
+      "id": "tx-p2-0012",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-20",
+      "amount": -315.0,
+      "category": "utilities",
+      "description": "Întreținere bloc Titan"
+    },
+    {
+      "id": "tx-p2-0013",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-01",
+      "amount": -140.0,
+      "category": "transport",
+      "description": "Abonament lunar Metrorex + STB"
+    },
+    {
+      "id": "tx-p2-0014",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-21",
+      "amount": -140.0,
+      "category": "transport",
+      "description": "Uber curse urgente"
+    },
+    {
+      "id": "tx-p2-0015",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-12",
+      "amount": -200.0,
+      "category": "health",
+      "description": "Farmacia Catena tratament"
+    },
+    {
+      "id": "tx-p2-0016",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-08",
+      "amount": -60.0,
+      "category": "subscriptions",
+      "description": "Netflix standard"
+    },
+    {
+      "id": "tx-p2-0017",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-14",
+      "amount": -40.0,
+      "category": "subscriptions",
+      "description": "Spotify Individual"
+    },
+    {
+      "id": "tx-p2-0018",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-19",
+      "amount": -250.0,
+      "category": "other_expense",
+      "description": "Cheltuieli neprevăzute gospodărie"
+    },
+    {
+      "id": "tx-p2-0019",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-08-27",
+      "amount": -150.0,
+      "category": "other_expense",
+      "description": "Produse farmacie și igienă dm"
+    },
+    {
+      "id": "tx-p2-0020",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-15",
+      "amount": 5500.0,
+      "category": "salary",
+      "description": "Salariu Retail Logistics SRL"
+    },
+    {
+      "id": "tx-p2-0021",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-16",
+      "amount": -1180.0,
+      "category": "debt_payment",
+      "description": "Rată credit George BCR",
+      "debtId": "debt-p2-personal-bcr"
+    },
+    {
+      "id": "tx-p2-0022",
+      "accountId": "acc-p2-raiff-current",
+      "date": "2026-09-18",
+      "amount": -1040.0,
+      "category": "debt_payment",
+      "description": "Rată credit nevoi personale Raiffeisen",
+      "debtId": "debt-p2-personal-raiff"
+    },
+    {
+      "id": "tx-p2-0023",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-22",
+      "amount": -560.0,
+      "category": "debt_payment",
+      "description": "Plată minimă card credit BCR",
+      "debtId": "debt-p2-card-bcr"
+    },
+    {
+      "id": "tx-p2-0024",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-25",
+      "amount": -590.0,
+      "category": "debt_payment",
+      "description": "Rată împrumut Credius IFN",
+      "debtId": "debt-p2-ifn-cred"
+    },
+    {
+      "id": "tx-p2-0025",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-02",
+      "amount": -350.0,
+      "category": "groceries",
+      "description": "Mega Image București Sector 3"
+    },
+    {
+      "id": "tx-p2-0026",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-09",
+      "amount": -400.0,
+      "category": "groceries",
+      "description": "Kaufland Titan"
+    },
+    {
+      "id": "tx-p2-0027",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-17",
+      "amount": -320.0,
+      "category": "groceries",
+      "description": "Lidl Dristor"
+    },
+    {
+      "id": "tx-p2-0028",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-24",
+      "amount": -230.0,
+      "category": "groceries",
+      "description": "Profi City Sector 3"
+    },
+    {
+      "id": "tx-p2-0029",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-06",
+      "amount": -140.0,
+      "category": "utilities",
+      "description": "Enel Energie Muntenia"
+    },
+    {
+      "id": "tx-p2-0030",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-10",
+      "amount": -65.0,
+      "category": "utilities",
+      "description": "Digi Romania"
+    },
+    {
+      "id": "tx-p2-0031",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-20",
+      "amount": -315.0,
+      "category": "utilities",
+      "description": "Întreținere bloc Titan"
+    },
+    {
+      "id": "tx-p2-0032",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-01",
+      "amount": -140.0,
+      "category": "transport",
+      "description": "Abonament lunar Metrorex + STB"
+    },
+    {
+      "id": "tx-p2-0033",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-21",
+      "amount": -140.0,
+      "category": "transport",
+      "description": "Uber curse urgente"
+    },
+    {
+      "id": "tx-p2-0034",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-12",
+      "amount": -200.0,
+      "category": "health",
+      "description": "Farmacia Catena tratament"
+    },
+    {
+      "id": "tx-p2-0035",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-08",
+      "amount": -60.0,
+      "category": "subscriptions",
+      "description": "Netflix standard"
+    },
+    {
+      "id": "tx-p2-0036",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-14",
+      "amount": -40.0,
+      "category": "subscriptions",
+      "description": "Spotify Individual"
+    },
+    {
+      "id": "tx-p2-0037",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-19",
+      "amount": -250.0,
+      "category": "other_expense",
+      "description": "Cheltuieli neprevăzute gospodărie"
+    },
+    {
+      "id": "tx-p2-0038",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-09-27",
+      "amount": -150.0,
+      "category": "other_expense",
+      "description": "Produse farmacie și igienă dm"
+    },
+    {
+      "id": "tx-p2-0039",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-15",
+      "amount": 5500.0,
+      "category": "salary",
+      "description": "Salariu Retail Logistics SRL"
+    },
+    {
+      "id": "tx-p2-0040",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-16",
+      "amount": -1180.0,
+      "category": "debt_payment",
+      "description": "Rată credit George BCR",
+      "debtId": "debt-p2-personal-bcr"
+    },
+    {
+      "id": "tx-p2-0041",
+      "accountId": "acc-p2-raiff-current",
+      "date": "2026-10-18",
+      "amount": -1040.0,
+      "category": "debt_payment",
+      "description": "Rată credit nevoi personale Raiffeisen",
+      "debtId": "debt-p2-personal-raiff"
+    },
+    {
+      "id": "tx-p2-0042",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-22",
+      "amount": -560.0,
+      "category": "debt_payment",
+      "description": "Plată minimă card credit BCR",
+      "debtId": "debt-p2-card-bcr"
+    },
+    {
+      "id": "tx-p2-0043",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-25",
+      "amount": -590.0,
+      "category": "debt_payment",
+      "description": "Rată împrumut Credius IFN",
+      "debtId": "debt-p2-ifn-cred"
+    },
+    {
+      "id": "tx-p2-0044",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-02",
+      "amount": -350.0,
+      "category": "groceries",
+      "description": "Mega Image București Sector 3"
+    },
+    {
+      "id": "tx-p2-0045",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-09",
+      "amount": -400.0,
+      "category": "groceries",
+      "description": "Kaufland Titan"
+    },
+    {
+      "id": "tx-p2-0046",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-17",
+      "amount": -320.0,
+      "category": "groceries",
+      "description": "Lidl Dristor"
+    },
+    {
+      "id": "tx-p2-0047",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-24",
+      "amount": -230.0,
+      "category": "groceries",
+      "description": "Profi City Sector 3"
+    },
+    {
+      "id": "tx-p2-0048",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-06",
+      "amount": -140.0,
+      "category": "utilities",
+      "description": "Enel Energie Muntenia"
+    },
+    {
+      "id": "tx-p2-0049",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-10",
+      "amount": -65.0,
+      "category": "utilities",
+      "description": "Digi Romania"
+    },
+    {
+      "id": "tx-p2-0050",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-20",
+      "amount": -315.0,
+      "category": "utilities",
+      "description": "Întreținere bloc Titan"
+    },
+    {
+      "id": "tx-p2-0051",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-01",
+      "amount": -140.0,
+      "category": "transport",
+      "description": "Abonament lunar Metrorex + STB"
+    },
+    {
+      "id": "tx-p2-0052",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-21",
+      "amount": -140.0,
+      "category": "transport",
+      "description": "Uber curse urgente"
+    },
+    {
+      "id": "tx-p2-0053",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-12",
+      "amount": -200.0,
+      "category": "health",
+      "description": "Farmacia Catena tratament"
+    },
+    {
+      "id": "tx-p2-0054",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-08",
+      "amount": -60.0,
+      "category": "subscriptions",
+      "description": "Netflix standard"
+    },
+    {
+      "id": "tx-p2-0055",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-14",
+      "amount": -40.0,
+      "category": "subscriptions",
+      "description": "Spotify Individual"
+    },
+    {
+      "id": "tx-p2-0056",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-19",
+      "amount": -250.0,
+      "category": "other_expense",
+      "description": "Cheltuieli neprevăzute gospodărie"
+    },
+    {
+      "id": "tx-p2-0057",
+      "accountId": "acc-p2-bcr-current",
+      "date": "2026-10-27",
+      "amount": -150.0,
+      "category": "other_expense",
+      "description": "Produse farmacie și igienă dm"
+    }
+  ]
+}

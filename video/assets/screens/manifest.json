@@ -1,0 +1,42 @@
+{
+  "persona": "Radu Popescu (persona-1)",
+  "locale": "en",
+  "screens": [
+    {
+      "id": "01-home",
+      "file": "assets/screens/01-home.png",
+      "route": "/overview",
+      "width": 1080,
+      "height": 2340,
+      "bytes": 454831,
+      "description": "Scene 3 — Overview / Home (Radu Popescu in EN, pastel mint GlassHero & collapsible rows)"
+    },
+    {
+      "id": "02-plan",
+      "file": "assets/screens/02-plan.png",
+      "route": "/plan",
+      "width": 1080,
+      "height": 2340,
+      "bytes": 498009,
+      "description": "Scene 4 — Plan / This month (Pay 1.050 lei total on BCR Credit card + 600 lei extra)"
+    },
+    {
+      "id": "03-refinance",
+      "file": "assets/screens/03-refinance.png",
+      "route": "/refinance",
+      "width": 1080,
+      "height": 2340,
+      "bytes": 474920,
+      "description": "Scene 5 — Refinance / Pay less (ING Bank Personal loan -> Raiffeisen +3.515 lei net savings)"
+    },
+    {
+      "id": "04-freedom",
+      "file": "assets/screens/04-freedom.png",
+      "route": "/progress",
+      "width": 1080,
+      "height": 2340,
+      "bytes": 555164,
+      "description": "Scene 6 — Progress / Goal (99 months Freedom Ring countdown & Paid-off moments timeline)"
+    }
+  ]
+}

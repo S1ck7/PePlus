@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "PePlus",
+    "slug": "stripe-vibehack",
+    "scheme": "debt-planner",
+    "version": "0.1.0",
+    "platforms": ["android", "web"],
+    "icon": "./assets/brand/icon.png",
+    "primaryColor": "#B5E8D3",
+    "backgroundColor": "#F7F5F8",
+    "plugins": ["expo-router"],
+    "android": {
+      "package": "ro.vibehack.debtplanner",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/brand/icon.png",
+        "backgroundColor": "#B5E8D3"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "favicon": "./assets/brand/icon.png"
+    }
+  }
+}

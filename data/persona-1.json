@@ -1,0 +1,1030 @@
+{
+  "id": "persona-1",
+  "name": "Radu Popescu",
+  "age": 32,
+  "city": "Cluj-Napoca",
+  "monthlyNetIncome": 12000,
+  "hadLatePayments": false,
+  "accounts": [
+    {
+      "id": "acc-p1-bt-current",
+      "bank": "Banca Transilvania",
+      "iban": "RO49BTRL0000123456789012",
+      "type": "current",
+      "balance": 5430.5
+    },
+    {
+      "id": "acc-p1-bt-savings",
+      "bank": "Banca Transilvania",
+      "iban": "RO49BTRL0000123456789013",
+      "type": "savings",
+      "balance": 15000
+    },
+    {
+      "id": "acc-p1-ing-current",
+      "bank": "ING Bank",
+      "iban": "RO88INGB0000999912345678",
+      "type": "current",
+      "balance": 1850.2
+    },
+    {
+      "id": "acc-p1-bcr-current",
+      "bank": "BCR",
+      "iban": "RO12RNCB0000123456789012",
+      "type": "current",
+      "balance": 940
+    }
+  ],
+  "debts": [
+    {
+      "id": "debt-p1-mortgage-bt",
+      "type": "mortgage",
+      "lender": "Banca Transilvania",
+      "balance": 310000,
+      "originalAmount": 350000,
+      "interestRate": 8.45,
+      "rateType": "variable",
+      "referenceIndex": "IRCC",
+      "dae": 8.85,
+      "monthlyPayment": 2420,
+      "monthlyFees": 20,
+      "remainingMonths": 331,
+      "creditLimit": null,
+      "earlyRepaymentFeePct": 0,
+      "startDate": "2022-03-15"
+    },
+    {
+      "id": "debt-p1-personal-ing",
+      "type": "personal_loan",
+      "lender": "ING Bank",
+      "balance": 36000,
+      "originalAmount": 48000,
+      "interestRate": 11.25,
+      "rateType": "fixed",
+      "referenceIndex": "none",
+      "dae": 12.15,
+      "monthlyPayment": 1085,
+      "monthlyFees": 15,
+      "remainingMonths": 40,
+      "creditLimit": null,
+      "earlyRepaymentFeePct": 1,
+      "startDate": "2023-03-10"
+    },
+    {
+      "id": "debt-p1-card-bcr",
+      "type": "credit_card",
+      "lender": "BCR",
+      "balance": 8500,
+      "originalAmount": 8500,
+      "interestRate": 24.95,
+      "rateType": "fixed",
+      "referenceIndex": "none",
+      "dae": 28.14,
+      "monthlyPayment": 450,
+      "monthlyFees": 5,
+      "remainingMonths": null,
+      "creditLimit": 12000,
+      "earlyRepaymentFeePct": 0,
+      "startDate": "2023-06-20"
+    },
+    {
+      "id": "debt-p1-ifn-cred",
+      "type": "ifn_loan",
+      "lender": "Credius IFN",
+      "balance": 3200,
+      "originalAmount": 5000,
+      "interestRate": 19.5,
+      "rateType": "fixed",
+      "referenceIndex": "none",
+      "dae": 22.4,
+      "monthlyPayment": 320,
+      "monthlyFees": 10,
+      "remainingMonths": 12,
+      "creditLimit": null,
+      "earlyRepaymentFeePct": 1,
+      "startDate": "2024-03-01"
+    },
+    {
+      "id": "debt-p1-bnpl-mokka",
+      "type": "bnpl",
+      "lender": "Mokka",
+      "balance": 900,
+      "originalAmount": 1800,
+      "interestRate": 0,
+      "rateType": "fixed",
+      "referenceIndex": "none",
+      "dae": 0,
+      "monthlyPayment": 225,
+      "monthlyFees": 0,
+      "remainingMonths": 4,
+      "creditLimit": null,
+      "earlyRepaymentFeePct": 0,
+      "startDate": "2024-07-15"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "tx-p1-0001",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-10",
+      "amount": 12000,
+      "category": "salary",
+      "description": "Salariu Endava Romania SRL"
+    },
+    {
+      "id": "tx-p1-0002",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-12",
+      "amount": -2420,
+      "category": "debt_payment",
+      "description": "Rată credit ipotecar Banca Transilvania",
+      "debtId": "debt-p1-mortgage-bt"
+    },
+    {
+      "id": "tx-p1-0003",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-08-15",
+      "amount": -1085,
+      "category": "debt_payment",
+      "description": "Rată credit de nevoi personale ING Bank",
+      "debtId": "debt-p1-personal-ing"
+    },
+    {
+      "id": "tx-p1-0004",
+      "accountId": "acc-p1-bcr-current",
+      "date": "2026-08-20",
+      "amount": -450,
+      "category": "debt_payment",
+      "description": "Plată minimă card de credit George BCR",
+      "debtId": "debt-p1-card-bcr"
+    },
+    {
+      "id": "tx-p1-0005",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-22",
+      "amount": -320,
+      "category": "debt_payment",
+      "description": "Rată împrumut Credius IFN",
+      "debtId": "debt-p1-ifn-cred"
+    },
+    {
+      "id": "tx-p1-0006",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-25",
+      "amount": -225,
+      "category": "debt_payment",
+      "description": "Rată 4x Mokka achiziție eMAG",
+      "debtId": "debt-p1-bnpl-mokka"
+    },
+    {
+      "id": "tx-p1-0007",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-02",
+      "amount": -650,
+      "category": "groceries",
+      "description": "Carrefour Cluj Vivo"
+    },
+    {
+      "id": "tx-p1-0008",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-07",
+      "amount": -380,
+      "category": "groceries",
+      "description": "Mega Image Platinia Cluj"
+    },
+    {
+      "id": "tx-p1-0009",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-14",
+      "amount": -540,
+      "category": "groceries",
+      "description": "Kaufland Mărăști"
+    },
+    {
+      "id": "tx-p1-0010",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-21",
+      "amount": -410,
+      "category": "groceries",
+      "description": "Lidl Bună Ziua Cluj"
+    },
+    {
+      "id": "tx-p1-0011",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-28",
+      "amount": -220,
+      "category": "groceries",
+      "description": "Piața Mihai Viteazu Cluj"
+    },
+    {
+      "id": "tx-p1-0012",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-04",
+      "amount": -210,
+      "category": "utilities",
+      "description": "E.ON Energie Gaz"
+    },
+    {
+      "id": "tx-p1-0013",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-05",
+      "amount": -195,
+      "category": "utilities",
+      "description": "Electrica Furnizare SA"
+    },
+    {
+      "id": "tx-p1-0014",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-08",
+      "amount": -85,
+      "category": "utilities",
+      "description": "Digi Romania RCS RDS"
+    },
+    {
+      "id": "tx-p1-0015",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-18",
+      "amount": -260,
+      "category": "utilities",
+      "description": "Întreținere Asociație Proprietari"
+    },
+    {
+      "id": "tx-p1-0016",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-03",
+      "amount": -350,
+      "category": "transport",
+      "description": "Rompetrol Cluj Alimentare"
+    },
+    {
+      "id": "tx-p1-0017",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-16",
+      "amount": -180,
+      "category": "transport",
+      "description": "OMV Calea Turzii"
+    },
+    {
+      "id": "tx-p1-0018",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-24",
+      "amount": -120,
+      "category": "transport",
+      "description": "Bolt Rides Cluj"
+    },
+    {
+      "id": "tx-p1-0019",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-11",
+      "amount": -210,
+      "category": "health",
+      "description": "Farmacia Tei Platinia"
+    },
+    {
+      "id": "tx-p1-0020",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-19",
+      "amount": -140,
+      "category": "health",
+      "description": "Regina Maria Consultație"
+    },
+    {
+      "id": "tx-p1-0021",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-08-06",
+      "amount": -60,
+      "category": "subscriptions",
+      "description": "Netflix Subscription"
+    },
+    {
+      "id": "tx-p1-0022",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-08-09",
+      "amount": -40,
+      "category": "subscriptions",
+      "description": "Spotify Premium"
+    },
+    {
+      "id": "tx-p1-0023",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-08-13",
+      "amount": -35,
+      "category": "subscriptions",
+      "description": "YouTube Premium"
+    },
+    {
+      "id": "tx-p1-0024",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-08-17",
+      "amount": -15,
+      "category": "subscriptions",
+      "description": "Apple iCloud Storage"
+    },
+    {
+      "id": "tx-p1-0025",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-01",
+      "amount": -270,
+      "category": "entertainment",
+      "description": "World Class Fitness Cluj Abonament"
+    },
+    {
+      "id": "tx-p1-0026",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-08",
+      "amount": -320,
+      "category": "entertainment",
+      "description": "Restaurant Samsara Food Lab"
+    },
+    {
+      "id": "tx-p1-0027",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-15",
+      "amount": -280,
+      "category": "entertainment",
+      "description": "Restaurant Rod Cluj"
+    },
+    {
+      "id": "tx-p1-0028",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-20",
+      "amount": -110,
+      "category": "entertainment",
+      "description": "Cinema City Iulius Mall"
+    },
+    {
+      "id": "tx-p1-0029",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-22",
+      "amount": -120,
+      "category": "entertainment",
+      "description": "Olivo Coffee Roasters"
+    },
+    {
+      "id": "tx-p1-0030",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-27",
+      "amount": -100,
+      "category": "entertainment",
+      "description": "Meron Specialty Coffee"
+    },
+    {
+      "id": "tx-p1-0031",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-05",
+      "amount": -380,
+      "category": "shopping",
+      "description": "Zara Iulius Mall"
+    },
+    {
+      "id": "tx-p1-0032",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-12",
+      "amount": -290,
+      "category": "shopping",
+      "description": "Decathlon Cluj"
+    },
+    {
+      "id": "tx-p1-0033",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-19",
+      "amount": -280,
+      "category": "shopping",
+      "description": "Dedeman Cluj-Napoca"
+    },
+    {
+      "id": "tx-p1-0034",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-26",
+      "amount": -150,
+      "category": "shopping",
+      "description": "Cărturești Iulius Mall"
+    },
+    {
+      "id": "tx-p1-0035",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-16",
+      "amount": -120,
+      "category": "other_expense",
+      "description": "Spălătorie auto JetWash"
+    },
+    {
+      "id": "tx-p1-0036",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-23",
+      "amount": -180,
+      "category": "other_expense",
+      "description": "Produse menaj dm Drogerie"
+    },
+    {
+      "id": "tx-p1-0037",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-08-29",
+      "amount": -200,
+      "category": "other_expense",
+      "description": "Cadou aniversare"
+    },
+    {
+      "id": "tx-p1-0038",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-10",
+      "amount": 12000,
+      "category": "salary",
+      "description": "Salariu Endava Romania SRL"
+    },
+    {
+      "id": "tx-p1-0039",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-12",
+      "amount": -2420,
+      "category": "debt_payment",
+      "description": "Rată credit ipotecar Banca Transilvania",
+      "debtId": "debt-p1-mortgage-bt"
+    },
+    {
+      "id": "tx-p1-0040",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-09-15",
+      "amount": -1085,
+      "category": "debt_payment",
+      "description": "Rată credit de nevoi personale ING Bank",
+      "debtId": "debt-p1-personal-ing"
+    },
+    {
+      "id": "tx-p1-0041",
+      "accountId": "acc-p1-bcr-current",
+      "date": "2026-09-20",
+      "amount": -450,
+      "category": "debt_payment",
+      "description": "Plată minimă card de credit George BCR",
+      "debtId": "debt-p1-card-bcr"
+    },
+    {
+      "id": "tx-p1-0042",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-22",
+      "amount": -320,
+      "category": "debt_payment",
+      "description": "Rată împrumut Credius IFN",
+      "debtId": "debt-p1-ifn-cred"
+    },
+    {
+      "id": "tx-p1-0043",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-25",
+      "amount": -225,
+      "category": "debt_payment",
+      "description": "Rată 4x Mokka achiziție eMAG",
+      "debtId": "debt-p1-bnpl-mokka"
+    },
+    {
+      "id": "tx-p1-0044",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-02",
+      "amount": -650,
+      "category": "groceries",
+      "description": "Carrefour Cluj Vivo"
+    },
+    {
+      "id": "tx-p1-0045",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-07",
+      "amount": -380,
+      "category": "groceries",
+      "description": "Mega Image Platinia Cluj"
+    },
+    {
+      "id": "tx-p1-0046",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-14",
+      "amount": -540,
+      "category": "groceries",
+      "description": "Kaufland Mărăști"
+    },
+    {
+      "id": "tx-p1-0047",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-21",
+      "amount": -410,
+      "category": "groceries",
+      "description": "Lidl Bună Ziua Cluj"
+    },
+    {
+      "id": "tx-p1-0048",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-28",
+      "amount": -220,
+      "category": "groceries",
+      "description": "Piața Mihai Viteazu Cluj"
+    },
+    {
+      "id": "tx-p1-0049",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-04",
+      "amount": -210,
+      "category": "utilities",
+      "description": "E.ON Energie Gaz"
+    },
+    {
+      "id": "tx-p1-0050",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-05",
+      "amount": -195,
+      "category": "utilities",
+      "description": "Electrica Furnizare SA"
+    },
+    {
+      "id": "tx-p1-0051",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-08",
+      "amount": -85,
+      "category": "utilities",
+      "description": "Digi Romania RCS RDS"
+    },
+    {
+      "id": "tx-p1-0052",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-18",
+      "amount": -260,
+      "category": "utilities",
+      "description": "Întreținere Asociație Proprietari"
+    },
+    {
+      "id": "tx-p1-0053",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-03",
+      "amount": -350,
+      "category": "transport",
+      "description": "Rompetrol Cluj Alimentare"
+    },
+    {
+      "id": "tx-p1-0054",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-16",
+      "amount": -180,
+      "category": "transport",
+      "description": "OMV Calea Turzii"
+    },
+    {
+      "id": "tx-p1-0055",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-24",
+      "amount": -120,
+      "category": "transport",
+      "description": "Bolt Rides Cluj"
+    },
+    {
+      "id": "tx-p1-0056",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-11",
+      "amount": -210,
+      "category": "health",
+      "description": "Farmacia Tei Platinia"
+    },
+    {
+      "id": "tx-p1-0057",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-19",
+      "amount": -140,
+      "category": "health",
+      "description": "Regina Maria Consultație"
+    },
+    {
+      "id": "tx-p1-0058",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-09-06",
+      "amount": -60,
+      "category": "subscriptions",
+      "description": "Netflix Subscription"
+    },
+    {
+      "id": "tx-p1-0059",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-09-09",
+      "amount": -40,
+      "category": "subscriptions",
+      "description": "Spotify Premium"
+    },
+    {
+      "id": "tx-p1-0060",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-09-13",
+      "amount": -35,
+      "category": "subscriptions",
+      "description": "YouTube Premium"
+    },
+    {
+      "id": "tx-p1-0061",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-09-17",
+      "amount": -15,
+      "category": "subscriptions",
+      "description": "Apple iCloud Storage"
+    },
+    {
+      "id": "tx-p1-0062",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-01",
+      "amount": -270,
+      "category": "entertainment",
+      "description": "World Class Fitness Cluj Abonament"
+    },
+    {
+      "id": "tx-p1-0063",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-08",
+      "amount": -320,
+      "category": "entertainment",
+      "description": "Restaurant Samsara Food Lab"
+    },
+    {
+      "id": "tx-p1-0064",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-15",
+      "amount": -280,
+      "category": "entertainment",
+      "description": "Restaurant Rod Cluj"
+    },
+    {
+      "id": "tx-p1-0065",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-20",
+      "amount": -110,
+      "category": "entertainment",
+      "description": "Cinema City Iulius Mall"
+    },
+    {
+      "id": "tx-p1-0066",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-22",
+      "amount": -120,
+      "category": "entertainment",
+      "description": "Olivo Coffee Roasters"
+    },
+    {
+      "id": "tx-p1-0067",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-27",
+      "amount": -100,
+      "category": "entertainment",
+      "description": "Meron Specialty Coffee"
+    },
+    {
+      "id": "tx-p1-0068",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-05",
+      "amount": -380,
+      "category": "shopping",
+      "description": "Zara Iulius Mall"
+    },
+    {
+      "id": "tx-p1-0069",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-12",
+      "amount": -290,
+      "category": "shopping",
+      "description": "Decathlon Cluj"
+    },
+    {
+      "id": "tx-p1-0070",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-19",
+      "amount": -280,
+      "category": "shopping",
+      "description": "Dedeman Cluj-Napoca"
+    },
+    {
+      "id": "tx-p1-0071",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-26",
+      "amount": -150,
+      "category": "shopping",
+      "description": "Cărturești Iulius Mall"
+    },
+    {
+      "id": "tx-p1-0072",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-16",
+      "amount": -120,
+      "category": "other_expense",
+      "description": "Spălătorie auto JetWash"
+    },
+    {
+      "id": "tx-p1-0073",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-23",
+      "amount": -180,
+      "category": "other_expense",
+      "description": "Produse menaj dm Drogerie"
+    },
+    {
+      "id": "tx-p1-0074",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-09-29",
+      "amount": -200,
+      "category": "other_expense",
+      "description": "Cadou aniversare"
+    },
+    {
+      "id": "tx-p1-0075",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-10",
+      "amount": 12000,
+      "category": "salary",
+      "description": "Salariu Endava Romania SRL"
+    },
+    {
+      "id": "tx-p1-0076",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-12",
+      "amount": -2420,
+      "category": "debt_payment",
+      "description": "Rată credit ipotecar Banca Transilvania",
+      "debtId": "debt-p1-mortgage-bt"
+    },
+    {
+      "id": "tx-p1-0077",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-10-15",
+      "amount": -1085,
+      "category": "debt_payment",
+      "description": "Rată credit de nevoi personale ING Bank",
+      "debtId": "debt-p1-personal-ing"
+    },
+    {
+      "id": "tx-p1-0078",
+      "accountId": "acc-p1-bcr-current",
+      "date": "2026-10-20",
+      "amount": -450,
+      "category": "debt_payment",
+      "description": "Plată minimă card de credit George BCR",
+      "debtId": "debt-p1-card-bcr"
+    },
+    {
+      "id": "tx-p1-0079",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-22",
+      "amount": -320,
+      "category": "debt_payment",
+      "description": "Rată împrumut Credius IFN",
+      "debtId": "debt-p1-ifn-cred"
+    },
+    {
+      "id": "tx-p1-0080",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-25",
+      "amount": -225,
+      "category": "debt_payment",
+      "description": "Rată 4x Mokka achiziție eMAG",
+      "debtId": "debt-p1-bnpl-mokka"
+    },
+    {
+      "id": "tx-p1-0081",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-02",
+      "amount": -650,
+      "category": "groceries",
+      "description": "Carrefour Cluj Vivo"
+    },
+    {
+      "id": "tx-p1-0082",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-07",
+      "amount": -380,
+      "category": "groceries",
+      "description": "Mega Image Platinia Cluj"
+    },
+    {
+      "id": "tx-p1-0083",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-14",
+      "amount": -540,
+      "category": "groceries",
+      "description": "Kaufland Mărăști"
+    },
+    {
+      "id": "tx-p1-0084",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-21",
+      "amount": -410,
+      "category": "groceries",
+      "description": "Lidl Bună Ziua Cluj"
+    },
+    {
+      "id": "tx-p1-0085",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-28",
+      "amount": -220,
+      "category": "groceries",
+      "description": "Piața Mihai Viteazu Cluj"
+    },
+    {
+      "id": "tx-p1-0086",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-04",
+      "amount": -210,
+      "category": "utilities",
+      "description": "E.ON Energie Gaz"
+    },
+    {
+      "id": "tx-p1-0087",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-05",
+      "amount": -195,
+      "category": "utilities",
+      "description": "Electrica Furnizare SA"
+    },
+    {
+      "id": "tx-p1-0088",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-08",
+      "amount": -85,
+      "category": "utilities",
+      "description": "Digi Romania RCS RDS"
+    },
+    {
+      "id": "tx-p1-0089",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-18",
+      "amount": -260,
+      "category": "utilities",
+      "description": "Întreținere Asociație Proprietari"
+    },
+    {
+      "id": "tx-p1-0090",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-03",
+      "amount": -350,
+      "category": "transport",
+      "description": "Rompetrol Cluj Alimentare"
+    },
+    {
+      "id": "tx-p1-0091",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-16",
+      "amount": -180,
+      "category": "transport",
+      "description": "OMV Calea Turzii"
+    },
+    {
+      "id": "tx-p1-0092",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-24",
+      "amount": -120,
+      "category": "transport",
+      "description": "Bolt Rides Cluj"
+    },
+    {
+      "id": "tx-p1-0093",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-11",
+      "amount": -210,
+      "category": "health",
+      "description": "Farmacia Tei Platinia"
+    },
+    {
+      "id": "tx-p1-0094",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-19",
+      "amount": -140,
+      "category": "health",
+      "description": "Regina Maria Consultație"
+    },
+    {
+      "id": "tx-p1-0095",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-10-06",
+      "amount": -60,
+      "category": "subscriptions",
+      "description": "Netflix Subscription"
+    },
+    {
+      "id": "tx-p1-0096",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-10-09",
+      "amount": -40,
+      "category": "subscriptions",
+      "description": "Spotify Premium"
+    },
+    {
+      "id": "tx-p1-0097",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-10-13",
+      "amount": -35,
+      "category": "subscriptions",
+      "description": "YouTube Premium"
+    },
+    {
+      "id": "tx-p1-0098",
+      "accountId": "acc-p1-ing-current",
+      "date": "2026-10-17",
+      "amount": -15,
+      "category": "subscriptions",
+      "description": "Apple iCloud Storage"
+    },
+    {
+      "id": "tx-p1-0099",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-01",
+      "amount": -270,
+      "category": "entertainment",
+      "description": "World Class Fitness Cluj Abonament"
+    },
+    {
+      "id": "tx-p1-0100",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-08",
+      "amount": -320,
+      "category": "entertainment",
+      "description": "Restaurant Samsara Food Lab"
+    },
+    {
+      "id": "tx-p1-0101",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-15",
+      "amount": -280,
+      "category": "entertainment",
+      "description": "Restaurant Rod Cluj"
+    },
+    {
+      "id": "tx-p1-0102",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-20",
+      "amount": -110,
+      "category": "entertainment",
+      "description": "Cinema City Iulius Mall"
+    },
+    {
+      "id": "tx-p1-0103",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-22",
+      "amount": -120,
+      "category": "entertainment",
+      "description": "Olivo Coffee Roasters"
+    },
+    {
+      "id": "tx-p1-0104",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-27",
+      "amount": -100,
+      "category": "entertainment",
+      "description": "Meron Specialty Coffee"
+    },
+    {
+      "id": "tx-p1-0105",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-05",
+      "amount": -380,
+      "category": "shopping",
+      "description": "Zara Iulius Mall"
+    },
+    {
+      "id": "tx-p1-0106",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-12",
+      "amount": -290,
+      "category": "shopping",
+      "description": "Decathlon Cluj"
+    },
+    {
+      "id": "tx-p1-0107",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-19",
+      "amount": -280,
+      "category": "shopping",
+      "description": "Dedeman Cluj-Napoca"
+    },
+    {
+      "id": "tx-p1-0108",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-26",
+      "amount": -150,
+      "category": "shopping",
+      "description": "Cărturești Iulius Mall"
+    },
+    {
+      "id": "tx-p1-0109",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-16",
+      "amount": -120,
+      "category": "other_expense",
+      "description": "Spălătorie auto JetWash"
+    },
+    {
+      "id": "tx-p1-0110",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-23",
+      "amount": -180,
+      "category": "other_expense",
+      "description": "Produse menaj dm Drogerie"
+    },
+    {
+      "id": "tx-p1-0111",
+      "accountId": "acc-p1-bt-current",
+      "date": "2026-10-29",
+      "amount": -200,
+      "category": "other_expense",
+      "description": "Cadou aniversare"
+    }
+  ]
+}

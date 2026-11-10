@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PePlus pitch</title>
+<!--
+  PePlus pitch deck (T36, redesigned in T41). One folder, no CDN: works offline at the venue.
+  Keys: Right/Space/PageDown = next, Left/PageUp = back, Home/End, F = fullscreen, N = speaker timing,
+        B = backup demo video (silent, timed to docs/presentation-script.md 0:45-2:30), 1-5 = jump to a demo phase,
+        A = the 28-second ad. Esc leaves a video slide.
+  Follows docs/presentation-script.md. Brand D-044 (pastel mint #B5E8D3 on white; deep green bookends match the ad).
+  Numbers come from `npm run demo-numbers` (measured vs assumed is tagged).
+  PDF backup: slides/peplus.pdf (printed from this file).
+-->
+<style>
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 800; font-display: block; src: url(fonts/inter-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 800; font-display: block; src: url(fonts/inter-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  :root {
+    --bg: #F7F5F8; --surface: #FFFFFF;
+    --mint: #B5E8D3; --mint-soft: #E3F6EE; --mint-glow: rgba(127, 205, 174, 0.45);
+    --ink: #123B2C; --ink-2: #2E5A49; --accent: #2F6B55;
+    --text: #2B3348; --text-2: #454D63; --muted: #5E6578; --border: #E6E1E9;
+    --deep0: #04140E; --deep1: #0B2A1F; --dim: rgba(230,246,239,0.68); --coral: #FF8A7A;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #0B1310; overflow: hidden; }
+  body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; color: var(--text); -webkit-font-smoothing: antialiased; font-feature-settings: 'cv11', 'ss01'; }
+  #deck { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: center; }
+  .slide { position: absolute; inset: 0; background: var(--bg); padding: 96px 120px; display: none; flex-direction: column; overflow: hidden; }
+  .slide.active { display: flex; }
+
+  /* Deep green slides: same canvas as the ad (dot grid + soft glows). */
+  .slide.dark { background: radial-gradient(120% 90% at 50% 40%, var(--deep1) 0%, var(--deep0) 70%); color: #fff; }
+  .slide.dark::before { content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(circle, rgba(181,232,211,0.13) 1.6px, transparent 1.9px); background-size: 46px 46px;
+    -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, black 30%, transparent 100%); mask-image: radial-gradient(70% 70% at 50% 50%, black 30%, transparent 100%); }
+  .slide.dark::after { content: ''; position: absolute; width: 1100px; height: 1100px; left: -250px; top: -350px; border-radius: 50%; pointer-events: none;
+    background: radial-gradient(circle, rgba(58,114,94,0.55) 0%, transparent 65%); animation: drift 14s ease-in-out infinite alternate; }
+  .slide.dark > * { position: relative; z-index: 1; }
+  .slide.dark > .footer, .slide.dark > .timing { position: absolute; }
+  @keyframes drift { to { transform: translate(380px, 260px); } }
+
+  /* Entrance: each .r element fades up in order (delay set by --i). */
+  .slide.active .r { animation: up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--i, 0) * 90ms + 60ms); }
+  @keyframes up { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+  .slide.active .pop { animation: pop 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) both; animation-delay: calc(var(--i, 0) * 90ms + 60ms); }
+  @keyframes pop { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+
+  .kicker { font-size: 24px; font-weight: 800; letter-spacing: 3.5px; text-transform: uppercase; color: var(--accent); margin: 0 0 22px; }
+  .dark .kicker { color: var(--mint); }
+  h1 { font-size: 120px; line-height: 1; letter-spacing: -4.5px; margin: 0; font-weight: 800; }
+  h2 { font-size: 76px; line-height: 1.04; letter-spacing: -2.6px; margin: 0 0 48px; color: var(--ink); font-weight: 800; }
+  .dark h2 { color: #fff; }
+  h3 { font-size: 34px; margin: 0 0 12px; color: var(--ink); font-weight: 800; letter-spacing: -0.6px; }
+  p, li { font-size: 30px; line-height: 1.4; color: var(--text-2); margin: 0; }
+  .dark p, .dark li { color: var(--dim); }
+  .src { font-size: 19px; color: var(--muted); font-weight: 600; }
+  .dark .src { color: var(--dim); }
+  .tag { display: inline-block; font-size: 17px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 6px 13px; border-radius: 999px; background: var(--mint-soft); color: var(--accent); vertical-align: middle; }
+  .tag.assumed { background: #EFEDF2; color: var(--muted); }
+  strong { color: var(--ink); }
+  .dark strong { color: #fff; }
+
+  .glass { position: relative; overflow: hidden; border-radius: 44px; padding: 56px 64px; background: rgba(181, 232, 211, 0.78); border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 24px 60px rgba(47,107,85,0.22); }
+  .glass::before { content: ''; position: absolute; width: 640px; height: 640px; left: -180px; top: -260px; border-radius: 50%; background: radial-gradient(circle, var(--mint-glow) 0%, transparent 68%); }
+  .glass::after { content: ''; position: absolute; width: 560px; height: 560px; right: -160px; bottom: -260px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 68%); }
+  .glass > * { position: relative; z-index: 1; }
+  .glass p, .glass li { color: var(--ink-2); }
+  .card { background: var(--surface); border-radius: 32px; padding: 40px 44px; box-shadow: 0 8px 28px rgba(43,51,72,0.07); }
+  .row { display: flex; gap: 36px; }
+  .col { display: flex; flex-direction: column; gap: 28px; }
+  .grow { flex: 1; min-width: 0; }
+  .stat { font-size: 120px; font-weight: 800; letter-spacing: -4px; line-height: 0.95; color: var(--ink); }
+  .stat-label { font-size: 28px; color: var(--text-2); margin-top: 16px; line-height: 1.35; }
+  .phone { width: 300px; border-radius: 46px; padding: 12px; background: linear-gradient(145deg, #2C3833 0%, #101714 45%, #1E2925 100%); box-shadow: 0 30px 70px rgba(4,20,14,0.35); flex: none; }
+  .phone img { display: block; width: 100%; border-radius: 36px; }
+  ul.clean { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 20px; }
+  ul.clean li { padding-left: 44px; position: relative; }
+  ul.clean li::before { content: ''; position: absolute; left: 6px; top: 15px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); }
+  ul.clean.muted li::before { background: #C9CDD8; }
+  ul.big li { font-size: 36px; } ul.big li::before { top: 19px; }
+  .dark ul.clean li::before { background: var(--mint); }
+  .footer { position: absolute; left: 120px; right: 120px; bottom: 44px; display: flex; justify-content: space-between; align-items: center; z-index: 2; }
+  .footer img { height: 38px; opacity: 0.9; }
+  .footer .num { font-size: 20px; font-weight: 700; color: var(--muted); }
+  .dark .footer .num { color: var(--dim); }
+  .timing { display: none; position: absolute; top: 36px; right: 120px; font-size: 20px; font-weight: 800; color: var(--accent); background: var(--mint-soft); padding: 6px 14px; border-radius: 999px; z-index: 3; }
+  body.show-timing .timing { display: block; }
+
+  /* Title */
+  .hub { width: 260px; height: 260px; border-radius: 74px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 30%, #D6F5E8 0%, var(--mint) 55%, #8FD3B8 100%); box-shadow: 0 0 120px rgba(181,232,211,0.45); }
+  .hub img { width: 190px; }
+  .ring { position: absolute; border: 2px solid var(--mint); border-radius: 50%; opacity: 0; animation: ring 3.2s ease-out infinite; }
+  @keyframes ring { from { transform: scale(1); opacity: 0.45; } to { transform: scale(2.3); opacity: 0; } }
+
+  /* Problem */
+  .lenders { display: flex; gap: 16px; margin: 0 0 30px; }
+  .lenders img { width: 84px; height: 84px; border-radius: 22px; background: #fff; padding: 9px; box-shadow: 0 6px 16px rgba(18,59,44,0.14); object-fit: contain; }
+  .debt-row { display: flex; justify-content: space-between; font-size: 28px; padding: 14px 0; border-bottom: 2px solid rgba(18,59,44,0.12); color: var(--ink-2); }
+  .debt-row b { color: var(--ink); }
+  .debt-row:last-child { border: 0; }
+
+  /* Demo cover */
+  .phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .phase { border-radius: 30px; padding: 30px 32px; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(181,232,211,0.25); }
+  .phase .n { font-size: 20px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--mint); }
+  .phase .t { font-size: 32px; font-weight: 800; color: #fff; margin: 12px 0 8px; letter-spacing: -0.5px; }
+  .phase .d { font-size: 24px; color: var(--dim); line-height: 1.35; }
+  .phase .time { font-size: 20px; font-weight: 700; color: var(--dim); margin-top: 16px; font-variant-numeric: tabular-nums; }
+
+  /* Build */
+  .chips { display: flex; gap: 14px; flex-wrap: wrap; }
+  .chip { font-size: 25px; font-weight: 700; padding: 12px 22px; border-radius: 999px; background: var(--surface); color: var(--ink); box-shadow: 0 4px 14px rgba(43,51,72,0.06); }
+  .flowline { display: flex; align-items: center; gap: 0; }
+  .node { border-radius: 30px; padding: 26px 30px; background: var(--surface); box-shadow: 0 8px 28px rgba(43,51,72,0.07); flex: 1; }
+  .node.master { background: rgba(181,232,211,0.75); }
+  .node .who { font-size: 20px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); }
+  .node .what { font-size: 26px; color: var(--text-2); margin-top: 8px; line-height: 1.35; }
+  .arrow { width: 54px; flex: none; text-align: center; font-size: 40px; color: var(--accent); font-weight: 800; }
+
+  /* Value */
+  .compare { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .compare .card { padding: 30px 36px; }
+  .compare .us { background: rgba(181,232,211,0.7); }
+  table.econ { border-collapse: collapse; width: 100%; }
+  table.econ td { font-size: 26px; padding: 14px 0; border-bottom: 2px solid var(--border); color: var(--text-2); }
+  table.econ td:last-child { text-align: right; font-weight: 800; color: var(--ink); white-space: nowrap; padding-left: 24px; }
+  table.econ tr:last-child td { border-bottom: 0; }
+
+  /* Close */
+  .qr { flex-direction: column; width: 360px; height: 360px; border-radius: 36px; background: #fff; display: flex; align-items: center; justify-content: center; text-align: center; padding: 32px; font-size: 24px; font-weight: 700; color: var(--accent); line-height: 1.35; flex: none; box-shadow: 0 0 80px rgba(181,232,211,0.35); }
+  .qr img { width: 100%; height: 100%; object-fit: contain; }
+
+  /* Full-bleed video slides */
+  .slide.video { padding: 0; background: #000; }
+  .slide.video video { width: 100%; height: 100%; object-fit: contain; background: #000; }
+  .vhint { position: absolute; left: 24px; bottom: 18px; font-size: 16px; color: rgba(255,255,255,0.45); z-index: 2; }
+  .backup-row { flex-direction: row; align-items: center; justify-content: center; gap: 48px; }
+  .backup-row .phone { width: 360px; }
+
+  @page { size: 1920px 1080px; margin: 0; }
+  @media print {
+    html, body { overflow: visible; height: auto; background: none; }
+    #deck { position: static; transform: none !important; height: auto; }
+    .slide { position: relative; display: flex !important; width: 1920px; height: 1080px; break-after: page; }
+    .slide.video, .timing, #hint, .vhint { display: none !important; }
+    .r, .pop { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .slide.dark::after, .ring { animation: none !important; }
+  }
+  #hint { position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); font-size: 13px; color: #8A8F9C; background: rgba(255,255,255,0.85); padding: 6px 12px; border-radius: 999px; transition: opacity 0.6s; z-index: 10; }
+</style>
+</head>
+<body>
+<div id="deck">
+
+  <!-- 1. Title (0:00-0:15) -->
+  <section class="slide dark" data-time="0:00 - 0:15" style="justify-content:center; align-items:center; text-align:center;">
+    <div style="position:relative; display:flex; align-items:center; justify-content:center; margin-bottom:64px;" class="pop">
+      <div class="ring" style="width:260px; height:260px;"></div>
+      <div class="ring" style="width:260px; height:260px; animation-delay:1.6s;"></div>
+      <div class="hub"><img src="logo-ink.png" alt="PePlus"></div>
+    </div>
+    <h1 class="r" style="--i:2; color:#fff;">All your debts. <span style="color:var(--mint);">One plan.</span></h1>
+    <p class="r" style="--i:3; font-size:36px; margin-top:36px; max-width:1300px;">For Romanians juggling several loans: what each debt really costs, what to pay first, and when refinancing truly saves money.</p>
+    <div class="footer"><span class="src">Stripe VibeHack Constanța · 2026</span><span class="num"></span></div>
+    <div class="timing"></div>
+  </section>
+
+  <!-- 2. Problem and user (0:15-0:45) -->
+  <section class="slide" data-time="0:15 - 0:45 · at 0:42 switch to the emulator">
+    <p class="kicker r">The Romanian multi-loan reality</p>
+    <h2 class="r" style="--i:1;">Loans are scattered across banks,<br>and nobody says what to do next.</h2>
+    <div class="row grow" style="align-items:stretch;">
+      <div class="col" style="width:600px;">
+        <div class="card r" style="--i:2;"><div class="stat">3M+</div><div class="stat-label">Romanians hold consumer credit <span class="tag">BNR</span></div></div>
+        <div class="card r" style="--i:3;"><div class="stat">56%</div><div class="stat-label">of consumer debt is owed by people with several loans <span class="tag">BNR</span></div></div>
+      </div>
+      <div class="glass grow r" style="--i:4; padding:50px 60px;">
+        <p class="kicker" style="color:var(--ink-2);">Meet Radu <span class="tag assumed" style="margin-left:10px;">demo profile</span></p>
+        <p style="font-size:40px; color:var(--ink); font-weight:800; letter-spacing:-0.8px; margin-bottom:26px;">32, Cluj · 12.000 lei a month</p>
+        <div class="lenders"><img src="banks/bt.png" alt="Banca Transilvania"><img src="banks/ing.png" alt="ING Bank"><img src="banks/bcr.png" alt="BCR"><img src="banks/credius.png" alt="Credius"><img src="banks/mokka.png" alt="Mokka"></div>
+        <div class="debt-row"><span>5 debts with 5 lenders</span><b>358.600 lei</b></div>
+        <div class="debt-row"><span>Paid every month</span><b>4.500 lei</b></div>
+        <div class="debt-row"><span>Which one hurts most?</span><b style="color:#9A2B1E;">no idea</b></div>
+      </div>
+    </div>
+    <div class="footer"><img src="logo-mint.png" alt=""><span class="num"></span></div>
+    <div class="timing"></div>
+  </section>
+
+  <!-- 3. Live demo cover (0:45-2:30). B = backup video, 1-5 = jump to a phase. -->
+  <section class="slide dark" data-time="0:45 - 2:30 · live demo · B = backup video" style="justify-content:center;">
+    <p class="kicker r">Live demo · one journey</p>
+    <h2 class="r" style="--i:1; font-size:92px; letter-spacing:-3.5px;">Radu's month, from input to outcome.</h2>
+    <div class="phases">
+      <div class="phase r" style="--i:2;"><div class="n">1 · Input</div><div class="t">Connect banks</div><div class="d">Open-banking consent (simulated) and one late-payment question</div><div class="time">0:45</div></div>
+      <div class="phase r" style="--i:3;"><div class="n">2 · Processing</div><div class="t">The real picture</div><div class="d">358.600 lei owed, 600 lei left a month, 38% of income vs the 40% BNR limit</div><div class="time">1:05</div></div>
+      <div class="phase r" style="--i:4;"><div class="n">3 · Output</div><div class="t">What to do</div><div class="d">+600 lei on the BCR card; refinance ING with Raiffeisen, save 3.515 lei</div><div class="time">1:30</div></div>
+      <div class="phase r" style="--i:5;"><div class="n">4 · Meaning</div><div class="t">The goal</div><div class="d">Debt-free Feb 2035 instead of Jun 2054</div><div class="time">2:15</div></div>
+    </div>
+    <div class="footer"><span class="src">If the emulator freezes: press B for the recorded demo (1-5 jump to a phase)</span><span class="num"></span></div>
+    <div class="timing"></div>
+  </section>
+
+  <!-- 4. How we built it (2:30-2:55) -->
+  <section class="slide" data-time="2:30 - 2:55">
+    <p class="kicker r">How we built it</p>
+    <h2 class="r" style="--i:1;">Plain maths, real Romanian rules,<br>seven AIs working through Git.</h2>
+    <div class="chips r" style="--i:2; margin-bottom:36px;">
+      <span class="chip">Expo · React Native · TypeScript</span><span class="chip">Firebase Auth + Firestore</span><span class="chip">Works offline</span><span class="chip">22 automated tests</span><span class="chip">EN + RO</span>
+    </div>
+    <div class="row r" style="--i:3; margin-bottom:36px;">
+      <div class="card grow" style="padding:30px 40px;"><h3>Real Romanian rules</h3><p>BNR 40% debt-to-income limit · free early repayment on mortgages (OUG 52/2016) · at most 0.5–1% on fixed consumer loans (OUG 50/2010)</p></div>
+      <div class="card grow" style="padding:30px 40px;"><h3>16 real offers, 7 banks</h3><p>BT, BCR, ING, Raiffeisen, BRD, CEC, UniCredit · checked Nov 2026 · ranked only by the user's net saving</p></div>
+    </div>
+    <div class="flowline r" style="--i:4;">
+      <div class="node master"><div class="who">Claude Opus · lead</div><div class="what">Plans, splits and reviews every task; designs the UI</div></div>
+      <div class="arrow">→</div>
+      <div class="node"><div class="who">Codex</div><div class="what">Calculation engine, tests, Firebase layer</div></div>
+      <div class="arrow">+</div>
+      <div class="node"><div class="who">4 × Gemini</div><div class="what">Law, offers and market research; testing; video capture</div></div>
+    </div>
+    <p class="src r" style="--i:5; margin-top:22px;">One shared repo is the only channel: approach.md (rules) · decisions.md · tasks.md (task board) · the git log is the activity log</p>
+    <div class="timing"></div>
+  </section>
+
+  <!-- 5. Real vs mocked (2:55-3:15) -->
+  <section class="slide" data-time="2:55 - 3:15">
+    <p class="kicker r">Real vs. mocked · also inside the app under ⓘ</p>
+    <h2 class="r" style="--i:1;">Honest about what is real.</h2>
+    <div class="row" style="align-items:stretch;">
+      <div class="glass grow r" style="--i:2; padding:52px 60px;">
+        <h3 style="font-size:44px;">Real</h3>
+        <ul class="clean big" style="margin-top:20px;">
+          <li>The calculation engine: real cost, payoff order, savings after every fee, eligibility</li>
+          <li>16 public bank offers, the BNR limit and the legal fee caps</li>
+          <li>Firebase: accounts, profiles, bank snapshots, sent applications</li>
+        </ul>
+      </div>
+      <div class="card grow r" style="--i:3; padding:52px 60px;">
+        <h3 style="font-size:44px;">Mocked</h3>
+        <ul class="clean muted big" style="margin-top:20px;">
+          <li>The live bank connection (realistic demo data instead)</li>
+          <li>The three demo people and their transactions</li>
+          <li>A bank receiving the application</li>
+        </ul>
+        <p class="src" style="margin-top:34px; font-size:22px;">Limits: offers are a snapshot without personal pricing · eligibility is an estimate · no credit-bureau data (no public API)</p>
+      </div>
+    </div>
+    <div class="timing"></div>
+  </section>
+
+  <!-- 6. Value and business (3:15-3:35) -->
+  <section class="slide" data-time="3:15 - 3:35">
+    <p class="kicker r">Why PePlus · how we earn</p>
+    <div class="row" style="margin-bottom:34px; align-items:stretch;">
+      <div class="glass r" style="--i:1; width:900px; padding:44px 56px;">
+        <p class="kicker" style="color:var(--ink-2); margin-bottom:14px;">Radu, before → after <span class="tag" style="margin-left:8px;">measured by the engine</span></p>
+        <div class="stat" style="font-size:118px; white-space:nowrap;"><span style="opacity:0.4; text-decoration:line-through; text-decoration-thickness:7px;">2054</span> → 2035</div>
+        <div class="stat-label" style="color:var(--ink-2);">Debt-free <strong>19 years sooner</strong> by keeping today's payment, plus <strong>3.515 lei</strong> saved by refinancing one loan</div>
+      </div>
+      <div class="col grow" style="gap:18px;">
+        <div class="card r" style="--i:2; padding:24px 34px;"><h3 style="font-size:28px;">Bank apps</h3><p style="font-size:25px;">See only their own loans, never tell you to pay off a rival first</p></div>
+        <div class="card r" style="--i:3; padding:24px 34px;"><h3 style="font-size:28px;">Comparison sites</h3><p style="font-size:25px;">List rates, but don't know your budget or if you'd qualify</p></div>
+        <div class="card r" style="--i:4; padding:24px 34px; background:rgba(181,232,211,0.7);"><h3 style="font-size:28px;">PePlus</h3><p style="font-size:25px;">Every debt, this month's exact move, refinancing only when it saves</p></div>
+      </div>
+    </div>
+    <div class="card r" style="--i:5; padding:14px 44px;">
+      <table class="econ">
+        <tr><td>The person in debt pays</td><td>0 lei</td></tr>
+        <tr><td>Partner bank pays a referral fee, only when a refinancing closes <span class="tag" style="font-size:15px;">market benchmark</span></td><td>1.2% mortgage · 2.5% personal</td></tr>
+        <tr><td>The fee never changes the order: offers are ranked by the user's saving</td><td>by saving</td></tr>
+      </table>
+    </div>
+    <div class="timing"></div>
+  </section>
+
+  <!-- 7. Next step + QR (3:35-3:50) -->
+  <section class="slide dark" data-time="3:35 - 3:50" style="justify-content:center;">
+    <div class="row" style="align-items:center; gap:100px;">
+      <div class="grow">
+        <p class="kicker r">Next step</p>
+        <h2 class="r" style="--i:1; font-size:96px; letter-spacing:-3.5px;">From demo to pilot.</h2>
+        <ul class="clean" style="gap:24px;">
+          <li class="r" style="--i:2;">Register with <strong>ANPC</strong> as a credit intermediary</li>
+          <li class="r" style="--i:3;">Connect real banks through a <strong>licensed open-banking partner</strong></li>
+          <li class="r" style="--i:4;">Pilot with <strong>two partner banks</strong></li>
+        </ul>
+        <p class="r" style="--i:5; margin-top:56px; font-size:44px; font-weight:800; color:#fff; letter-spacing:-1px;">Scan to try PePlus. <span style="color:var(--mint);">Thank you.</span></p>
+      </div>
+      <div class="pop" style="--i:3; display:flex; flex-direction:column; align-items:center; gap:20px;">
+        <!-- On the day: run `npx expo start --tunnel`, save the QR as qr.png next to this file. It shows up here automatically. -->
+        <div class="qr" id="qr"><img src="qr.png" alt="Expo Go QR" onerror="this.parentNode.innerHTML='Expo Go QR<br><span style=&quot;font-size:20px;font-weight:600&quot;>save it as qr.png next to this deck</span>'"></div>
+        <span class="src">Opens in Expo Go</span>
+      </div>
+    </div>
+    <div class="timing"></div>
+  </section>
+
+  <!-- ===== Backup and extra slides (after the end; B and A jump here) ===== -->
+
+  <section class="slide video" id="backup-video" data-time="backup demo video">
+    <video src="media/demo-backup.mp4" muted playsinline preload="auto"></video>
+    <div class="vhint">Space play/pause · 1-5 jump to phase · Esc back</div>
+  </section>
+
+  <section class="slide video" id="ad-video" data-time="ad">
+    <video src="media/ad-16x9.mp4" playsinline preload="auto"></video>
+    <div class="vhint">Space play/pause · Esc back</div>
+  </section>
+
+  <section class="slide" data-time="backup">
+    <p class="kicker">Backup · the demo in four screens</p>
+    <h2 style="margin-bottom:34px;">Input → Processing → Output → Meaning</h2>
+    <div class="row" style="justify-content:space-between;">
+      <div style="text-align:center;"><p class="kicker">1 · Home</p><div class="phone"><img src="screens/radu-home.png" alt="Home"></div></div>
+      <div style="text-align:center;"><p class="kicker">2 · This month</p><div class="phone"><img src="screens/radu-this-month.png" alt="This month"></div></div>
+      <div style="text-align:center;"><p class="kicker">3 · Pay less</p><div class="phone"><img src="screens/radu-pay-less.png" alt="Pay less"></div></div>
+      <div style="text-align:center;"><p class="kicker">4 · Goal</p><div class="phone"><img src="screens/radu-goal.png" alt="Goal"></div></div>
+    </div>
+  </section>
+
+  <section class="slide" data-time="backup">
+    <p class="kicker">Backup · numbers <span class="tag" style="margin-left:10px;">measured by the engine</span></p>
+    <h2 style="margin-bottom:34px; font-size:60px; letter-spacing:-1.5px;">19 years sooner, and a refinance that pays for itself.</h2>
+    <div class="row" style="margin-bottom:34px;">
+      <div class="glass grow" style="padding:40px 48px;"><div class="stat" style="font-size:80px;">232 mo</div><div class="stat-label" style="color:var(--ink-2);">sooner: <strong>Feb 2035</strong> instead of <strong>Jun 2054</strong>. Almost all of it comes from rolling finished payments into the next debt; the 600 lei extra adds 1 year 9 months</div></div>
+      <div class="card grow" style="padding:40px 48px;"><div class="stat" style="font-size:80px;">3.515 lei</div><div class="stat-label">net saving, ING loan → Raiffeisen 6.25% fixed · <strong>1.085 → 1.004 lei</strong> a month</div></div>
+      <div class="card grow" style="padding:40px 48px;"><div class="stat" style="font-size:80px;">2.799 lei</div><div class="stat-label">a month Radu pays today in interest and fees</div></div>
+    </div>
+    <div class="card row" style="align-items:center; padding:28px 40px; gap:48px;">
+      <div style="width:420px; height:300px; flex:none; border-radius:24px; border:2px solid var(--border); background:url(screens/elena-pay-less.png) center 64% / 100% auto no-repeat;" role="img" aria-label="Elena's path to eligibility"></div>
+      <div class="grow"><h3>Over the limit? We don't just say no.</h3><p>Elena pays <strong>61.3%</strong> of her income to debt. PePlus maps the way: follow the plan, pay off three debts, and by <strong>Mar 2029</strong> she is at 19%, eligible to refinance the rest.</p></div>
+    </div>
+  </section>
+
+  <section class="slide" data-time="backup">
+    <p class="kicker">Backup · business model <span class="tag assumed" style="margin-left:10px;">assumptions</span></p>
+    <h2>How the referral fee adds up.</h2>
+    <div class="card" style="padding:20px 48px;">
+      <table class="econ">
+        <tr><td>Referral fee, market benchmark</td><td>1.2% mortgage (~3.600 lei) · 2.5% personal (~950 lei)</td></tr>
+        <tr><td>Year 1 users (assumed)</td><td>25.000</td></tr>
+        <tr><td>Closing rate: 60% eligible × 18% apply × 40% approved (assumed)</td><td>4.3% → 1.075 loans</td></tr>
+        <tr><td>Year 1 revenue (assumed)</td><td>2.02M lei</td></tr>
+        <tr><td>Open-banking cost per user (aggregator pricing)</td><td>~9 lei / year</td></tr>
+      </table>
+    </div>
+    <p class="src" style="margin-top:24px;">Sources: docs/business-model.md, docs/research-market.md</p>
+  </section>
+
+  <section class="slide backup-row" data-time="backup">
+    <div class="col" style="width:540px;"><p class="kicker">Backup · Elena</p><h2>Over the limit: the way there</h2><p>61% debt-to-income and 670 lei a month short; the app shows the path to eligibility by Mar 2029.</p></div>
+    <div class="phone"><img src="screens/elena-home.png" alt="Elena home"></div>
+    <div class="phone"><img src="screens/elena-pay-less.png" alt="Elena pay less"></div>
+  </section>
+
+</div>
+<div id="hint">← → move · F fullscreen · N timing · B backup demo · A ad</div>
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const deck = document.getElementById('deck');
+  const mainCount = slides.findIndex(s => s.id === 'backup-video');
+  const PHASES = [0, 20, 45, 65, 90]; // seconds into the backup video (stage 0:45, 1:05, 1:30, 1:50, 2:15)
+  slides.forEach((s, i) => {
+    const n = s.querySelector('.num'); if (n) n.textContent = i < mainCount ? `${i + 1} / ${mainCount}` : '';
+    const t = s.querySelector('.timing'); if (t) t.textContent = s.dataset.time;
+  });
+  let current = 0, returnTo = 0;
+  try { current = Math.min(slides.length - 1, Math.max(0, parseInt(location.hash.slice(1), 10) - 1 || 0)); } catch (e) {}
+  const video = () => slides[current].querySelector('video');
+  function show(i) {
+    const v = video(); if (v) v.pause();
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach((s, k) => s.classList.toggle('active', k === current));
+    history.replaceState(null, '', '#' + (current + 1));
+    const nv = video(); if (nv) { nv.currentTime = 0; nv.play().catch(() => {}); }
+  }
+  function openVideo(id, at) {
+    if (!slides[current].classList.contains('video')) returnTo = current;
+    show(slides.findIndex(s => s.id === id));
+    if (at !== undefined) { const v = video(); v.currentTime = at; }
+  }
+  function fit() { const s = Math.min(innerWidth / 1920, innerHeight / 1080); deck.style.transform = `translate(-50%, -50%) scale(${s})`; }
+  document.addEventListener('keydown', e => {
+    const onVideo = slides[current].classList.contains('video');
+    if (onVideo && e.key === ' ') { e.preventDefault(); const v = video(); v.paused ? v.play() : v.pause(); return; }
+    if (onVideo && e.key === 'Escape') { show(returnTo + (slides[current].id === 'backup-video' ? 1 : 0)); return; }
+    if (/^[1-5]$/.test(e.key)) { openVideo('backup-video', PHASES[+e.key - 1]); return; }
+    if (e.key === 'b' || e.key === 'B') { openVideo('backup-video', 0); return; }
+    if (e.key === 'a' || e.key === 'A') { openVideo('ad-video', 0); return; }
+    if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); show(onVideo && slides[current].id === 'backup-video' ? returnTo + 1 : current + 1); }
+    else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); show(onVideo ? returnTo : current - 1); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(mainCount - 1);
+    else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
+    else if (e.key === 'n' || e.key === 'N') document.body.classList.toggle('show-timing');
+  });
+  document.addEventListener('click', e => { if (slides[current].classList.contains('video')) return; show(current + (e.clientX > innerWidth / 2 ? 1 : -1)); });
+  addEventListener('resize', fit);
+  fit(); show(current);
+  setTimeout(() => { const h = document.getElementById('hint'); if (h) h.style.opacity = '0'; }, 3500);
+</script>
+</body>
+</html>
